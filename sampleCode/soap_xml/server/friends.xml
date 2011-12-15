@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users_getInfo_response xmlns="http://api.xiaonei.com/1.0/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://api.xiaonei.com/1.0/ 
+http://api.xiaonei.com/1.0/xiaonei.xsd" list="true">
+	<user>
+		<name>刘德华</name>
+		<sex>男</sex>
+		<star>在线</star>
+		<birthday>1961-09-27</birthday>
+	</user>
+	<user>
+		<name>张学友</name>
+		<sex>男</sex>
+		<star>离线</star>
+		<birthday>1962-09-27</birthday>
+	</user>
+</users_getInfo_response>

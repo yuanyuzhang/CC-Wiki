@@ -1,0 +1,38 @@
+<html>
+<body>
+<script type="text/javascript" src="http://localhost/smw/client/xml/funs.js"></script>
+<script type="text/javascript" src="http://localhost/smw/client/jquery/jquery-1.7.js"></script>
+<script type="text/javascript" src="http://localhost/smw/client/jquery/jsoapclient.js"></script>
+<script type="text/javascript" src="http://localhost/smw/client/jquery/jsoapclientparse.js"></script>
+<table border="1">
+<tr><td>Your Friends:</td></tr>
+<tr>
+<td><span id="s_a"></span></td>
+</tr>
+</table>
+<script type="text/javascript">
+function showFriends()
+{
+	var result;
+	mydata = '{"data":[{"type":"xsd:string","value":"' + "JYChen" + '"}]}';
+	jQuery.jSOAPClient.setLocation('http://localhost/smw/server/friendsService.php');
+	jQuery.jSOAPClient.setUrn('http://localhost');
+	jQuery.jSOAPClient.setSuccess(function(data){
+		var url = parse(data);
+		result =  showFriend(url);
+		show(result);
+	});
+	jQuery.jSOAPClient.setError(function(data){
+		document.write("Error: to call soap web service!");
+	});
+	jQuery.jSOAPClient.call('getFriends',mydata);
+}
+function show(result)
+{
+	document.getElementById("s_a").innerHTML=result;
+}
+</script>
+<input type="button" value="clikc to get friends" onclick="showFriends();" />	
+<br />
+</body>
+</html>
