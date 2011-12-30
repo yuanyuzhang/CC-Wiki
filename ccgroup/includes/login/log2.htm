@@ -1,0 +1,29 @@
+<html>
+
+<head>
+
+<title>log in successfully </title>
+<script type="text/javascript" src="../../conf.js">
+</script>
+<script type="text/javascript" src="../../scripts/function.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+var authorization_code=getArg(1);     //获得参数code   
+var url="http://graph.renren.com/oauth/token";   //获得access_token所需的url
+var client_id="507acaf228d04a9ba517e732b4454151";  //参数
+var client_secret="06e01ffcaa304f32bd3fcaa709e35411";
+redirect_uri="http://"+ ccHost + ":" + ccPort + "/" + ccSite +  "/extensions/CCGroup/includes/login/log2.htm";
+grant_type="authorization_code";
+url=url+"&"+"client_id="+client_id+"&"+"client_secret="+client_secret+"&"+"redirect_uri="+redirect_uri+"&"+"grant_type="+grant_type+"&"+authorization_code;
+var result=getContent(url,"");            // 发送GET请求
+var obj=eval('('+result+')');        //将数据转化为json格式
+</script>
+<script type="text/javascript">
+window.location.href="http://" + ccHost + ":" + ccPort + "/" + ccSite + "/index.php/Special:Invite?access_token="+obj.access_token+"&type=renren";
+
+</script>
+</body>
+
+</html>
+
