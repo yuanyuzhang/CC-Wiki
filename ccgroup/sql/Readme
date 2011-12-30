@@ -1,0 +1,5 @@
+Usage: export.sh -d [dbname] -u [user] -p [password] -F [prefix in db]
+export.sh脚本的功能是将数据库database_name 中的6个cc表导出，-f 指的是这6个表在数据库中的前缀。
+
+Usage: import.sh -d [dbname] -u [user] -p [password] -f [prefix in .sql] -F [prefix in db]
+import.sh脚本的功能是将.sql文件导入到数据库，-f指的是.sql文件中数据库表的前缀，-F指的是存入数据库后所要用的前缀。

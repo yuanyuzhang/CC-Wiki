@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.1.55, for redhat-linux-gnu (i386)
 --
--- Host: localhost    Database: ccWiki
+-- Host: localhost    Database: mediawiki1_16
 -- ------------------------------------------------------
 -- Server version	5.1.55
 
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cc_class`
+-- Table structure for table `mw_cc_class`
 --
 
-DROP TABLE IF EXISTS `cc_class`;
+DROP TABLE IF EXISTS `mw_cc_class`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cc_class` (
+CREATE TABLE `mw_cc_class` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varbinary(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -30,12 +30,12 @@ CREATE TABLE `cc_class` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cc_class`
+-- Dumping data for table `mw_cc_class`
 --
 
-LOCK TABLES `cc_class` WRITE;
-/*!40000 ALTER TABLE `cc_class` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cc_class` ENABLE KEYS */;
+LOCK TABLES `mw_cc_class` WRITE;
+/*!40000 ALTER TABLE `mw_cc_class` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mw_cc_class` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-12-30 10:33:21
+-- Dump completed on 2011-12-30 13:37:09

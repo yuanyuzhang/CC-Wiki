@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.1.55, for redhat-linux-gnu (i386)
 --
--- Host: localhost    Database: ccWiki
+-- Host: localhost    Database: mediawiki1_16
 -- ------------------------------------------------------
 -- Server version	5.1.55
 
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cc_conf_wb`
+-- Table structure for table `mw_cc_conf_wb`
 --
 
-DROP TABLE IF EXISTS `cc_conf_wb`;
+DROP TABLE IF EXISTS `mw_cc_conf_wb`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cc_conf_wb` (
+CREATE TABLE `mw_cc_conf_wb` (
   `page_name` varbinary(255) NOT NULL DEFAULT '',
   `weibo` varchar(50) NOT NULL,
   `time` varchar(12) DEFAULT NULL,
@@ -31,13 +31,13 @@ CREATE TABLE `cc_conf_wb` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cc_conf_wb`
+-- Dumping data for table `mw_cc_conf_wb`
 --
 
-LOCK TABLES `cc_conf_wb` WRITE;
-/*!40000 ALTER TABLE `cc_conf_wb` DISABLE KEYS */;
-INSERT INTO `cc_conf_wb` VALUES ('iphone','sina,tencent','2011-12-28'),('keyword','sina,','2011-12-31');
-/*!40000 ALTER TABLE `cc_conf_wb` ENABLE KEYS */;
+LOCK TABLES `mw_cc_conf_wb` WRITE;
+/*!40000 ALTER TABLE `mw_cc_conf_wb` DISABLE KEYS */;
+INSERT INTO `mw_cc_conf_wb` VALUES ('iphone','sina,tencent','2011-12-28'),('keyword','sina,','2011-12-31');
+/*!40000 ALTER TABLE `mw_cc_conf_wb` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-12-30 10:37:15
+-- Dump completed on 2011-12-30 13:37:09
