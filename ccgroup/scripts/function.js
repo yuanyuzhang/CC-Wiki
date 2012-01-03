@@ -7,9 +7,10 @@ function getArg(num){
   alert("wrong")
   return arg;
   }
-function getContent(url,post_data){
+function getContent(url,proxy){
 var xmlHttp = false;
-var request_url="http://localhost/proxy/index.php?"+"url="+url;
+var post_data="";
+var request_url=proxy+"?"+"url="+url;
 try {
 xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
 } catch (e) {

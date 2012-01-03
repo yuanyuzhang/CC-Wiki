@@ -3,34 +3,24 @@
 <head>
 
 <title> log in successfully </title>
-<script type="text/javascript" src="../../conf.js">
-</script>
+<script type="text/javascript" src="../../conf.js"></script>
 <script type="text/javascript" src="../../scripts/function.js"></script>
 </head>
 
 <body>
 <script type="text/javascript">
-var authorization_code=getArg(1);        //获得url中的code参数
-var url="https://api.kaixin001.com/oauth2/access_token"; //获取获取access_token的url
-var grant_type="authorization_code";                     //参数
-var client_id="3004238376121d9a4a078abfdd2b00ff";
-var client_secret="4d17c07e16cac63b048ea2f05838e000"
-var redirect_uri="http://" + ccHost + ":" + ccPort + "/" + ccSite  +  "/extenstions/CCGroup/includes/login/kaixin2.htm"
+var authorization_code=getArg(1);     
+var url="https://api.kaixin001.com/oauth2/access_token";
+var grant_type="authorization_code";                    
+var client_id=kaixin_key;
+var client_secret=kaixin_secret;
+var redirect_uri=kaixin_redirect;
 var post_data="grant_type="+grant_type+"&"+authorization_code+"&"+"client_id="+client_id+"&"+"client_secret="+client_secret+"&"+"redirect_uri="+redirect_uri;
-var access_token_result=getContent(url+"&"+post_data,"");           //POST请求结果
-//alert(access_token_result);
+var access_token_result=getContent(url+"&"+post_data,proxy);    
 var obj=eval('('+access_token_result+')');
-var access_token=obj.access_token;                       //获得access_token
-//document.write(access_token);
-//access_token=access_token.split('=')[1];
-//alert(access_token);
-//getContent("http://localhost/insertDB/index.php&type=kaixin&uid=zqx&access_token="+obj.access_token,"");
-//document.write(access_token);
-//var friend=getContent("http://localhost/kaixinMessage/index.php&access_token="+obj.access_token,"");
-//alert(friend);
 </script>
 <script type="text/javascript">
-window.location.href="http://" + ccHost + "/" + ccSite +  "/index.php/Special:Invite?access_token="+access_token+"&type=kaixin";
+window.location.href="http://"+ccHost+":"+ccPort+"/"+ccSite+"/index.php/Special:Invite?type=kaixin&access_token="+obj.access_token;
 
 </script>
 

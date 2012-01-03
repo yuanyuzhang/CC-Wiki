@@ -11,13 +11,13 @@ class SpecialInvite extends SpecialPage {
 
                 $this->setHeaders();
                 $wgOut->addHTML( $this->makeForm() );
-		
+
+		$this->sns=$wgRequest->getText( 'type' );		
 		$this->token=$wgRequest->getText( 'access_token' );
 		$this->token_secret=$wgRequest->getText( 'access_token_secret' );
-		$this->sns=$wgRequest->getText( 'type' );
-		//$wgOut->addWikiText( $sns )
 		if($this->token != ''){
-			$this->getFriends( $this->token, $this->sns, $this->token_secret);
+			$getForm = $this->getFriends( $this->token, $this->sns, $this->token_secret);
+			$wgOut->addHTML( $getForm );
 		}
         }
 
@@ -26,9 +26,9 @@ class SpecialInvite extends SpecialPage {
                 $title = self::getTitleFor( 'Invite' );
                 $form = '<fieldset><legend>' . wfMsgHtml( 'Invite' ) . '</legend>';
 		//login Renren
-                $form .= '<a href="https://graph.renren.com/oauth/authorize?response_type=code&client_id=507acaf228d04a9ba517e732b4454151&redirect_uri=http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/login/log2.htm&scope=read_user_feed read_user_status read_user_comment publish_feed write_guestbook status_update publish_comment"><input type="image" height="30" width="70" src="http://www.guanfang.info/uploads/allimg/110107/1_110107120047_1.jpg" /></a> &nbsp &nbsp';
+                $form .= '<a href="http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/login/renren1.htm"><input type="image" height="30" width="70" src="http://www.guanfang.info/uploads/allimg/110107/1_110107120047_1.jpg" /></a> &nbsp &nbsp';
 		//login Kaixin
-		$form .= '<a href="http://api.kaixin001.com/oauth2/authorize?response_type=code&client_id=3004238376121d9a4a078abfdd2b00ff&redirect_uri=http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/login/kaixin2.htm&scope=send_message"><input type="image" height="30" width="70" src="http://smt.114chn.com/Webpub/upload/091102/129016123320781250.jpg" /></a> &nbsp &nbsp';
+		$form .= '<a href="http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/login/kaixin1.htm"><input type="image" height="30" width="70" src="http://smt.114chn.com/Webpub/upload/091102/129016123320781250.jpg" /></a> &nbsp &nbsp';
 		//login Tencen
 		$form .= '<a href="http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/login/qqweibo1.htm"><input type="image" height="30" width="70" src="http://open.t.qq.com/images/resource/p9.gif" /></a> &nbsp &nbsp';
                 $form .= '</fieldset>';
@@ -62,7 +62,7 @@ class SpecialInvite extends SpecialPage {
 				$tag = false;
 				$form .= '<tr>';
 			}
-			$form .= '<td><img src="'.$photo->item(0)->nodeValue.'" /><br /><input type="checkbox" name="friends" value="'.$id->item(0)->nodeValue.'">'.$username->item(0)->nodeValue.'</input></td>';
+			$form .= '<td><img src="'.$photo->item(0)->nodeValue.'" /><br /><input type="checkbox" name="friends[]" id="friends" value="'.$id->item(0)->nodeValue.'">'.$username->item(0)->nodeValue.'</input></td>';
 			if(($count%6)==5){
 				$form .= '</tr>';
 				$count = -1;
@@ -83,7 +83,7 @@ class SpecialInvite extends SpecialPage {
 		$form .= Xml::SubmitButton( 'Invite' );
 		$form .= Xml::closeElement( 'form' );
 		$form .= $this->fenye();
-		$wgOut->addHTML( $form );
+		return $form;
 	}
 
 	private function fenye() {

@@ -16,14 +16,14 @@
 <script type="text/javascript" charset = "utf-8">
 var url="https://open.t.qq.com/cgi-bin/request_token";
 var login_url="https://open.t.qq.com/cgi-bin/authorize";
-var oauth_callback=encodeURIComponent(qqweibo_redirect);
-var oauth_consumer_key=qqweibo_key;
+var oauth_callback=encodeURIComponent(qqweibopost_redirect);
+var oauth_consumer_key=qqweibopost_key;
 var oauth_nonce=OAuth.nonce(32);
 var oauth_signature_method="HMAC-SHA1";
 var oauth_timestamp=OAuth.timestamp();
 var oauth_version="1.0";
 var oauth_signature="";
-var secret=qqweibo_secret;
+var secret=qqweibopost_secret;
 var url_encode=encodeURIComponent(url);
 var parameter="oauth_callback="+oauth_callback+"&"+"oauth_consumer_key="+oauth_consumer_key+"&"+"oauth_nonce="+oauth_nonce+"&"+"oauth_signature_method="+oauth_signature_method+"&"+"oauth_timestamp="+oauth_timestamp+"&"+"oauth_version="+oauth_version;
 var parameter_encode=encodeURIComponent(parameter);

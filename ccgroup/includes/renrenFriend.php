@@ -1,9 +1,10 @@
 <?php
+include('../conf.php');
 $access_token=$_REQUEST['access_token'];
-//$access_token="174175|6.b1d8dd00ea6b7adc13b9c0044ed34053.2592000.1327212000-427985954";
+//$access_token="174952|6.ebb4960f6298cb5713aa53541b7cb24f.2592000.1327806000-258943266";
 $method="friends.getFriends";
 $v="1.0";
-$secret="06e01ffcaa304f32bd3fcaa709e35411";
+$secret=$renren_secret;
 $format="XML";
 $content="access_token=".$access_token."format=".$format."method=".$method."v=".$v.$secret;
 $sig=md5($content);
@@ -16,7 +17,6 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_POSTFIELDS,$post_data);
 $response  = curl_exec($ch);
 curl_close($ch);//关闭
-//echo $response;
 $input=new DOMDocument();
 $doc=new DOMDocument('1.0','UTF-8');
 $doc->formatOutput=true;

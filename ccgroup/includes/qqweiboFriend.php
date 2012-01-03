@@ -1,18 +1,14 @@
 <?php
-//error_reporting('0');
 //设置include_path 到 OpenSDK目录
-set_include_path(dirname(dirname(__FILE__)) . '/lib/');
+set_include_path((dirname(__FILE__)) . '/lib/');
 require_once 'OpenSDK/Tencent/Weibo.php';
-require_once( '../conf.php');
-//include 'appkey.php';
-OpenSDK_Tencent_Weibo::init($appkey, $appsecret);
+include '../conf.php';
+OpenSDK_Tencent_Weibo::init($qqweibo_key, $qqweibo_secret);
 //打开session
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 	$_SESSION[OpenSDK_Tencent_Weibo::ACCESS_TOKEN]=$_REQUEST['oauth_token'];
 	$_SESSION[OpenSDK_Tencent_Weibo::OAUTH_TOKEN_SECRET]=$_REQUEST['oauth_token_secret'];
-//$_SESSION[OpenSDK_Tencent_Weibo::ACCESS_TOKEN]="f0d504bc125a46d6bff70ff3cb9fc6bc";
-//$_SESSION[OpenSDK_Tencent_Weibo::OAUTH_TOKEN_SECRET]="a92503333c470411cfb78461076347d1";
 	$api_name = 'friends/fanslist';
 	$params=array(
 					'format'=>'xml',
@@ -34,7 +30,7 @@ header('Content-Type: text/html; charset=utf-8');
     	$id->appendChild($doc->createTextNode($content['name']));
     	$name->appendChild($doc->createTextNode($content['nick']));
     	if($content['head']==""){
-    		$url->appendChild($doc->createTextNode("http://img.kaixin001.com.cn/i/50_0_0.gif"));
+    		$url->appendChild($doc->createTextNode("http:img.kaixin001.com.cn/i/50_0_0.gif"));
     	}
     	else{
     	$url->appendChild($doc->createTextNode($content['head']."/50"));

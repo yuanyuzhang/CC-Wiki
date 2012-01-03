@@ -16,7 +16,9 @@ class SpecialConfigureGB extends SpecialPage {
 		$this->meituan = $wgRequest->getText( 'meituan' );
 		$this->lashou = $wgRequest->getText( 'lashou' );
 		$this->city = $wgRequest->getText( 'city' );
-		$this->time = $wgRequest->getText( 'time' );
+		$this->year = $wgRequest->getText( 'YYYY' );
+		$this->month = $wgRequest->getText( 'MM' );
+		$this->day = $wgRequest->getText( 'DD' );
 
 		$wgOut->addHTML( $this->makeForm( $this->page_name ) );
 	/*
@@ -38,7 +40,7 @@ class SpecialConfigureGB extends SpecialPage {
 				}
 
 				mysql_select_db($ccDBName, $con);
-				mysql_query('UPDATE cc_conf_gb SET web="' .$this->meituan.','.$this->lashou .'",city="' .$this->city. '",time="' .$this->time. '" WHERE page_name="' .$this->page_name. '"');
+				mysql_query('UPDATE cc_conf_gb SET web="' .$this->meituan.','.$this->lashou .'",city="' .$this->city. '",time="' .$this->year. '-' .$this->month. '-' .$this->day.  '" WHERE page_name="' .$this->page_name. '"');
 				mysql_close( $con );
 //				$dbw->update( 'cc_configureGB', array( 'web' => $this->meituan.'&'.$this->lashou, 'city' => $this->city, 'time' => $this->time),'title="' . $this->keyword . '"',  __METHOD__, 'IGNORE');
 //				$dbw->delete( 'cc_configureGB', 'title="' . $this->keyword . '"', __METHOD__ );
@@ -46,7 +48,7 @@ class SpecialConfigureGB extends SpecialPage {
 			else{
 				//insert
 				$dbw = wfGetDB( DB_MASTER );
-				$dbw->insert( 'cc_conf_gb', array('page_name' => $this->page_name, 'web' => $this->meituan.','.$this->lashou, 'city' => $this->city, 'time' => $this->time), __METHOD__, 'IGNORE');
+				$dbw->insert( 'cc_conf_gb', array('page_name' => $this->page_name, 'web' => $this->meituan.','.$this->lashou, 'city' => $this->city, 'time' => $this->year. '-' .$this->month. '-' .$this->day), __METHOD__, 'IGNORE');
 			}
 			
 			$tmpUrl = 'http://' .$ccHost. ':' .$ccPort. '/' .$ccSite;
@@ -75,17 +77,82 @@ class SpecialConfigureGB extends SpecialPage {
 		$form .= Xml::openElement( 'form', array( 'name' => 'form1', 'method' => 'get', 'action' => $tmpUrl . '/index.php/Special:ConfigureGB' ));
 		$form .= '<input type="hidden" name="page_name" value="' .$page_name. '" /><br />';
 		$form .= '<input type="checkbox" name="meituan" value="meituan"><img height="30" width="90" src="http://logo.lookke.com/logo/mt.jpg" /></input> &nbsp';
-		$form .= '<input type="checkbox" name="lashou" value="lashou"><img height="40" width="90" src="http://tuangou.kgkl.cn/uploads/allimg/110515/13522224a-0.jpg" /></input><br /><br />';
+		$form .= '<input type="checkbox" name="lashou" value="lashou"><img height="40" width="90" src="http://tuangou.kgkl.cn/uploads/allimg/110515/13522224a-0.jpg" /></input> &nbsp';
+		$form .= '<input type="checkbox" name="nuomi" value="nuomi"><img height="40" width="90" src="http://a0.att.hudong.com/40/12/01300000802987127902125845364.jpg" /></input> &nbsp';
+		$form .= '<input type="checkbox" name="58" value="58"><img height="40" width="90" src="http://img.ev123.com/pic/server/200_200/285/569679_logo.jpg" /></input> &nbsp';
+		$form .= '<input type="checkbox" name="wowo" value="wowo"><img height="40" width="90" src="http://tuan1212.com/jinrituangou/img/55tuan.jpg" /></input><br /><br />';
 		//select city
 		$form .= 'Select City:'.$this->makeList().'<br /><br />';	
-		$form .= 'Time("yyyy-mm-dd"):<br /><input type="text" name="time"><br /><br />';
+		$form .= 'Select Time:
+			<select    name="YYYY"    onchange="YYYYDD(this.value)">   
+			<option    value="">=year=</option>   
+			</select>   
+		        <select    name="MM"        onchange="MMDD(this.value)">   
+		        <option    value="">=month=</option>   
+ 		        </select>   
+                        <select    name="DD">   
+                        <option    value="">=day=</option>   
+ 		        </select><br /><br />'; 
 		$form .= '<input type="reset" value="Reset" /> &nbsp &nbsp ';
 		$form .= Xml::submitButton( 'OK' );
 //		$form .= '<input type="submit" value="OK" />';
 		$form .= Xml::closeElement( 'form' );
 		$form .= '</filedset>';
+		$form .= $this->changeDate();
 		$form .= $this->changeList();
 		return $form;
+	}
+	private function changeDate() {
+		$out = '<script    language="JavaScript">
+   function    YYYYMMDDstart()   
+   {   
+           MonHead    =    [31,    28,    31,    30,    31,    30,    31,    31,    30,    31,    30,    31];   
+    
+           var    y        =    new    Date().getFullYear();   
+           for    (var    i    =    (y-3);    i    <    (y+30);    i++) 
+                   document.form1.YYYY.options.add(new    Option(""+i,  i));   
+    
+           for    (var    i    =    1;    i    <    13;    i++)   
+                   document.form1.MM.options.add(new    Option( ""+ i,   i));   
+    
+           var    n    =    MonHead[new    Date().getMonth()];   
+           if    (new    Date().getMonth()    ==1    &&    IsPinYear(YYYYvalue))    n++;   
+                   writeDay(n);   
+   }   
+   if(document.attachEvent)   
+       window.attachEvent("onload",    YYYYMMDDstart);   
+   else   
+       window.addEventListener("load",    YYYYMMDDstart,    false);   
+   function    YYYYDD(str)       
+   {   
+           var    MMvalue    =    document.form1.MM.options[document.form1.MM.selectedIndex].value;   
+           if    (MMvalue    ==    ""){    var    e    =    document.form1.DD;    optionsClear(e);    return;}   
+           var    n    =    MonHead[MMvalue    -    1];   
+           if    (MMvalue    ==2    &&    IsPinYear(str))    n++;   
+                   writeDay(n)   
+   }   
+   function    MMDD(str)        
+   {   
+           var    YYYYvalue    =    document.form1.YYYY.options[document.form1.YYYY.selectedIndex].value;   
+           if    (YYYYvalue    ==    ""){    var    e    =    document.form1.DD;    optionsClear(e);    return;}   
+           var    n    =    MonHead[str    -    1];   
+           if    (str    ==2    &&    IsPinYear(YYYYvalue))    n++;
+                   writeDay(n)   
+   }   
+   function    writeDay(n)      
+   {   
+           var    e    =    document.form1.DD;    optionsClear(e);   
+           for    (var    i=1;    i<(n+1);    i++)   
+                   e.options.add(new    Option(""+i,    i));   
+   }   
+   function    IsPinYear(year)  
+   {        return(0    ==    year%4    &&    (year%100    !=0    ||    year%400    ==    0));}   
+   function    optionsClear(e)   
+   {   
+           e.options.length    =    1;   
+   }   
+   </script>';
+		return $out;
 	}
 
 	private function changeList() {

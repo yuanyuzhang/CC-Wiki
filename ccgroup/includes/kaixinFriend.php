@@ -1,6 +1,7 @@
 <?php
+include('../conf.php');
 $access_token=$_REQUEST['access_token'];
-//$access_token="131061046_ac4a7ea2000f24cbfa253d0f6a35adee";
+//$access_token="131061046_a3480f4766ba885236a0755a28ba43a4";
 $fields="";
 $url="https://api.kaixin001.com/friends/me.json?access_token=".$access_token."&fields=".$fields;
 $ch = curl_init($url);//打开

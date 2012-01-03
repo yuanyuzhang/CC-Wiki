@@ -14,13 +14,13 @@
 <body>
 <script type="text/javascript">
 var url="https://open.t.qq.com/cgi-bin/access_token";
-var oauth_consumer_key=qqweibo_key;
+var oauth_consumer_key=qqweibopost_key;
 var oauth_signature_method="HMAC-SHA1";
 var oauth_timestamp=OAuth.timestamp();
 var oauth_nonce=OAuth.nonce(32);
 var oauth_version="1.0";
 var oauth_signature="";
-var secret=qqweibo_secret;
+var secret=qqweibopost_secret;
 var oauth_token_secret=getContent("session",proxy);
 var arg=getArg(1);
 oauth_token = arg.split("&")[0]; 
@@ -47,10 +47,11 @@ oauth_token=access.split("&")[0];
 oauth_token=oauth_token.split("=")[1]; 
 oauth_token_secret=access.split("&")[1]; 
 oauth_token_secret=oauth_token_secret.split("=")[1];
+getContent("qqweibosession&qqweibo_access_token="+oauth_token+"&qqweibo_access_token_secret="+oauth_token_secret,proxy);
 </script>
 <script type="text/javascript">
-window.location.href="http://"+ccHost+":"+ccPort+"/"+ccSite+"/index.php/Special:Invite?type=qq&access_token="+oauth_token+"&access_token_secret="+oauth_token_secret;
-
+window.open('','_parent','');
+window.close();
 </script>
 
 </body>

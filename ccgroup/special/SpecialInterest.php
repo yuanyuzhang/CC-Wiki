@@ -55,6 +55,13 @@ class SpecialInterest extends SpecialPage {
                 $form .= '<br /><br />' . Xml::submitButton( 'Interest' ) . '</p>';
                 $form .= Xml::closeElement( 'form' );
                 $form .= '</fieldset>';
+
+//		$form .= '<p>
+//一幅图像：
+//<img src="../../../../old_code/images/1325222716_lashou.jpg" width="128" height="128">
+//</p>
+//';
+
                  return $form;
         } 
 }
