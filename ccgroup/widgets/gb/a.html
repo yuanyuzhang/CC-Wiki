@@ -1,0 +1,224 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><link href="./uploadify/uploadify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="./uploadify/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="./uploadify/swfobject.js"></script>
+<script type="text/javascript" src="./uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+<script type="text/javascript" src="jcarousellite_1.0.1.js"></script>
+
+<script src="js/pagenav.min.js"></script>
+<style type="text/css" media="screen">
+a { color:#2B4A78; text-decoration:none; }
+	a:hover { color:#2B4A78;text-decoration:underline; }
+	a:focus, input:focus {outline-style:none; outline-width:medium; }
+
+/* custom css style: pageNum,cPageNum */
+.pageNum{border: 1px solid #999;padding:2px 8px;display: inline-block;}
+.cPageNum{font-weight: bold;padding:2px 5px;}
+#pageNav a:hover{text-decoration:none;background: #fff4d8; }
+
+
+
+</style>
+<script type="text/javascript" src="jquery-photofy.min.js"></script> 
+<script type="text/javascript"> $(document).ready(function () { var myOptions = { imagecount: 21, images: imageList } $("#facesPhotoWrapper").photofy(myOptions); }); </script>
+<script type="text/javascript">
+//开始全局变量
+    var disqus_shortname = 'zxlzr'; // required: replace example with your forum shortname
+	var disqus_developer = 1;
+	var disqus_url="http://127.0.0.1/mediawiki/groupbuy/a.html";
+	
+ disqus_identifier='';//全局变
+ globalpicid="hello";//全局唯一标识
+//var douploadpic='./uploadify/uploadify.php?pic='+globalpicid;
+$(document).ready(function() {
+
+
+
+//团购数据生成代码 
+
+
+
+				
+				$(function(){
+	//optional set
+	pageNav.pre="PRE";
+	pageNav.next="NEXT";
+	
+	 //  p:current page number.  
+	 //  pn: page sum.
+	pageNav.fn = function(p,pn){
+	  
+	    	$.ajax({
+					type:'GET',
+					url:'meituan.xml',
+					async:false,
+					dataType:'xml',//注意处理信息的类型为xml,默认为html
+					success:function(docxml){
+					     
+						//查找并迭代<book>节点
+						$(docxml).find('deal').each(function(){
+							if($(this).attr("id")==p){
+							var deal_title = $(this).children('deal_title').text();
+							var deal_url = $(this).children('deal_url').text();
+							var deal_img = $(this).children('deal_img').text();
+							var deal_desc = $(this).children('deal_desc').text();
+							globalpicid=$(this).children('globalid').text();
+							//dogetpiclist();
+							//alert(globalpicid);
+							//构造节点
+							
+							var  info = '<li>'+deal_title+'</li><li><img src="'+deal_img+'" /></li><li>  <a href="'+deal_url+'"> 去看看</a></li>';
+							$('#groupbuyinfo').html(info);
+						  disqus_identifier=globalpicid;
+						  //douploadpic='./uploadify/uploadify.php?pic='+globalpicid;
+						  //alert(douploadpic);
+						//  alert(disqus_identifier);
+							//$('#disqus_thread').html('<div id="disqus_thread"></div>');
+							$("#file_upload").uploadifySettings('scriptData',{'pic':globalpicid});动态更新配置参数 
+							
+							}
+							//alert(info);
+						})
+					}
+				
+				
+				
+				});
+				//图片的 第二模块
+				
+	$.get("getpiclist.php", { id: globalpicid},
+  function(data){
+                        var  info="";
+  
+						$(data).find('pic').each(function(){
+						
+							var pic = $(this).text();
+						
+							 info = info+'<img src="uploads/'+globalpicid+'/'+pic+'" alt="" width="100" height="100" />';
+							
+							
+							
+						
+						})
+						
+						$('#facesPhotoWrapper').html(info);
+							
+							//alert(info);
+							
+						
+						
+  });
+  
+  //第三板块
+  //alert(disqus_identifier);
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+				
+	
+	};
+	
+	//goto the page 3 of 33.
+	pageNav.go(1,33);
+	
+});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				function getglobalpicid(){
+				return globalpicid;
+				
+				}
+				
+				
+				
+
+
+
+
+  $('#file_upload').uploadify({
+    'uploader'  : './uploadify/uploadify.swf',
+    'script'    : './uploadify/uploadify.php',
+    'cancelImg' : './uploadify/cancel.png',
+    'folder'    : './uploads',
+    'auto'      : true,
+	'scriptData'  : {'pic':globalpicid}, 
+    'method'         : 'GET', 
+	'onComplete': function(event, queueID, fileObj, response, data) {             //上传完成后的操作
+            //alert(response);
+			var info='';
+				   		$(response).find('pic').each(function(){
+							
+							var pic = $(this).text();
+							
+						
+							 info = info+'<img src="uploads/'+globalpicid+'/'+pic+'" alt="" width="100" height="100" />';
+							
+							
+						
+							
+						
+						})
+						//alert(info);
+							$('#facesPhotoWrapper').html(info);
+				
+				 
+				
+               }
+  });
+
+ 
+});
+
+
+
+
+
+
+</script>
+
+
+
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>groupbuy</title>
+		
+	</head>
+	<body>
+	<div id="pageNav"></div><div id="groupbuyinfo">
+		
+		
+        
+
+		</div>
+		
+		<input id="file_upload" name="file_upload" type="file" />
+
+<div id="facesPhotoWrapper">
+</div>
+		
+		<div id="disqus_thread"></div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
