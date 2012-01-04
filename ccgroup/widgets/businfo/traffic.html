@@ -1,0 +1,266 @@
+﻿
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Sict//EN"
+
+    "http://www.w3.org//xhtml1/DTD/xhtml1-sict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+
+
+<style>
+
+	.cityList{height: 320px;width:372px;overflow-y:auto;}
+
+    .sel_container{position:absolute;top:0;font-size:12px;}
+
+    .map_popup {position: absolute;z-index: 200000;width: 382px;height: 344px;top:20px;}
+
+    .map_popup .popup_main { background:#fff;border: 1px solid #8BA4D8;height: 100%;overflow: hidden;position: absolute;width: 100%;z-index: 2;}
+
+    .map_popup .title {background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
+
+    color: #6688CC;font-size: 12px;font-weight: bold;height: 24px;line-height: 25px;padding-left: 7px;}
+
+    .map_popup button {background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;
+
+    border: 0 none;cursor: pointer;height: 12px;position: absolute;right: 4px;top: 6px;width: 12px;}	
+
+</style>
+
+<script src="js/jquery-1.7.min.js"></script>
+
+<title>
+
+公交导航</title>
+
+
+
+</head>
+
+<body>
+
+<div style="width:400px;height:300px;border:1px solid #000;margin-top:50px;" id="container"></div>
+
+<div class="sel_container"><strong id="curCity">北京市</strong> [<a id="curCityText" href="javascript:void(0)">更换城市</a>]</div>
+
+<div class="map_popup" id="cityList" style="display:none;">
+
+    <div class="popup_main">
+
+        <div class="title">城市列表</div>
+
+		<div class="cityList" id="citylist_container"></div>
+
+        <button id="popup_close"></button>
+
+    </div>
+
+</div>
+
+起点 <input type="text" id="from"/>终点<input type="text" id="to"/><button type="button" id="check_route">ok</button>
+
+<div id="panel"> </div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+
+<script type="text/javascript" >
+
+// 新创建地图
+
+map = new BMap.Map("container");
+
+map.centerAndZoom(new BMap.Point(116.395645, 39.929986), 12);
+
+
+
+// 创建CityList对象，并放在citylist_container节点内
+
+var myCl = new BMapLib.CityList({container : "citylist_container", map : map});
+
+
+
+// 给城市点击时，添加相关操作
+
+myCl.addEventListener("cityclick", function(e) {
+
+	// 修改当前城市显示
+
+	document.getElementById("curCity").innerHTML = e.name;
+
+
+
+	// 点击后隐藏城市列表
+
+	document.getElementById("cityList").style.display = "none";
+
+});
+
+
+
+// 给“更换城市”链接添加点击操作
+
+document.getElementById("curCityText").onclick = function() {
+
+	var cl = document.getElementById("cityList");
+
+	if (cl.style.display == "none") {
+
+		cl.style.display = "";
+
+	} else {
+
+		cl.style.display = "none";
+
+	}	
+
+};
+
+
+
+// 给城市列表上的关闭按钮添加点击操作
+
+document.getElementById("popup_close").onclick = function() {
+
+	var cl = document.getElementById("cityList");
+
+	if (cl.style.display == "none") {
+
+		cl.style.display = "";
+
+	} else {
+
+		cl.style.display = "none";
+
+	}	
+
+};
+
+
+
+
+
+ $("#check_route").click(function(){
+
+ 
+ 
+ 
+ 
+
+
+//var myCity = new BMap.LocalCity();
+//myCity.get(myFun);
+ 
+
+    //var map = new BMap.Map("container");
+    //map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+   // map.enableScrollWheelZoom();
+    var start = $("#from").val() ,end = $("#to").val() ,routePolicy = [BMAP_TRANSIT_POLICY_LEAST_TIME,BMAP_TRANSIT_POLICY_LEAST_TRANSFER,BMAP_TRANSIT_POLICY_LEAST_WALKING];
+    var arrInput = document.getElementById("dvPolicy").getElementsByTagName("input");
+    search(start,end,routePolicy[0]);
+    document.getElementById("dvPolicy").onclick = function(e){   
+        e = e || window.event;
+        var elem = e.srcElement || e.target , policyIndex;       
+        if(elem.tagName.toLowerCase() == "input"){
+            policyIndex = elem.getAttribute("id").replace("policy","");             
+            map.clearOverlays();
+            search(start,end,routePolicy[policyIndex]);             
+        }
+    }
+
+  
+  
+  
+});
+   
+    function search(start,end,route){ 
+        var transit = new BMap.TransitRoute($("#curCity").text(),{
+            renderOptions: {map: map,panel:"results"}, 
+            policy: route,
+			
+			
+			
+			
+			 
+    onSearchComplete: function(result) {
+        if (transit.getStatus()!=BMAP_STATUS_SUCCESS) {
+          $("#results").html("没有找到指定的公交导航路线");
+        }
+    }
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+        });
+        transit.search(start,end);
+		var aa=transit.getResults();
+		
+		
+    }
+
+
+</script>
+
+
+<div id="dvPolicy"> <input id="policy0" checked="true" type="radio" name="pickPolicy"/>较便捷<input id="policy1" type="radio" name="pickPolicy"/>可换乘<input id="policy2" type="radio" name="pickPolicy"/>少步行</div> 
+<div id="results" style="font-size:13px;margin-top:10px;width:400px;" ></div>
+
+<script type="text/javascript">
+
+
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+</script>
+
+
+
+

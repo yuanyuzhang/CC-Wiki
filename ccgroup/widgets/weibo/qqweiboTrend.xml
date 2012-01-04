@@ -20,7 +20,7 @@
     <cate>tencent</cate>
     <page>2</page>
   </status>
-  <status>
+  <status id="3">
     <mid>95622046277659</mid>
     <text>#Google# 前主席称 &amp;quot;占领华尔街运动&amp;quot; 所关注的是问题不是硅谷的生活现实</text>
     <time>2011-12-25 19:37:55</time>
@@ -30,7 +30,7 @@
     <cate>tencent</cate>
     <page>3</page>
   </status>
-  <status>
+  <status id="4">
     <mid>42204036008874</mid>
     <text>今天的#google#很有意思，下面的六个按键依次点一下会出现#圣诞#歌曲。</text>
     <time>2011-12-25 19:06:34</time>
@@ -40,7 +40,7 @@
     <cate>tencent</cate>
     <page>4</page>
   </status>
-  <status>
+  <status id="5">
     <mid>727092138665</mid>
     <text>&lt;a href="http://url.cn/1TTspM" target="_blank"&gt;http://url.cn/1TTspM&lt;/a&gt;  #圣诞节#版#Google#</text>
     <time>2011-12-25 17:45:42</time>
@@ -50,7 +50,7 @@
     <cate>tencent</cate>
     <page>5</page>
   </status>
-  <status>
+  <status id="6">
     <mid>103099053074323</mid>
     <text>#google#今天的首页很有创意哟~</text>
     <time>2011-12-25 16:14:58</time>
@@ -60,7 +60,7 @@
     <cate>tencent</cate>
     <page>6</page>
   </status>
-  <status>
+  <status id="7">
     <mid>49151027761522</mid>
     <text>#google#太好玩了</text>
     <time>2011-12-25 15:53:31</time>
@@ -70,7 +70,7 @@
     <cate>tencent</cate>
     <page>7</page>
   </status>
-  <status>
+  <status id="8">
     <mid>98109002636598</mid>
     <text>#google#</text>
     <time>2011-12-25 15:53:14</time>
@@ -80,7 +80,7 @@
     <cate>tencent</cate>
     <page>8</page>
   </status>
-  <status>
+  <status id="9">
     <mid>107108112988843</mid>
     <text>男孩在光棍节前向女孩表白，编了一条短信：n 55!w ! n a^o7 ! n paau !把手机倒过来看就是I need you I Love you I Miss you他觉得这份心意定能打动她，可是一直没有回讯。男孩伤心欲绝。只是他不知道自己的老款诺基亚永远也不懂#安卓#的陀螺仪和重力感应是什么。@htcwildfire  @coooop  #google#</text>
     <time>2011-12-25 14:38:06</time>
@@ -90,7 +90,7 @@
     <cate>tencent</cate>
     <page>9</page>
   </status>
-  <status>
+  <status id="10">
     <mid>14236056443299</mid>
     <text>#google# google db hack tool v1.5</text>
     <time>2011-12-25 13:41:00</time>
@@ -100,7 +100,7 @@
     <cate>tencent</cate>
     <page>10</page>
   </status>
-  <status>
+  <status id="11">
     <mid>67638016993381</mid>
     <text>#分享照片##google#我始终认为，google是当之无愧的搜索神奇，超级搜索引擎，有兴趣的朋友可以去看一下最新的google圣诞界面，很好玩~【不知道什么时候google能回归中国，重启.cn域名，又能在什么时候“去中国化”让我们用到纯正的google，那才是无所不能的google，圣诞快乐朋友们 @stephenjee】</text>
     <time>2011-12-25 09:39:21</time>
@@ -110,7 +110,7 @@
     <cate>tencent</cate>
     <page>11</page>
   </status>
-  <status>
+  <status id="12">
     <mid>54641026386914</mid>
     <text>今天的#Google#首页好好玩~&lt;a href="http://url.cn/4fAzqj" target="_blank"&gt;http://url.cn/4fAzqj&lt;/a&gt; </text>
     <time>2011-12-25 01:09:22</time>
@@ -120,7 +120,7 @@
     <cate>tencent</cate>
     <page>12</page>
   </status>
-  <status>
+  <status id="13">
     <mid>67637105418373</mid>
     <text>#Google#好有愛</text>
     <time>2011-12-24 21:54:01</time>
@@ -130,7 +130,7 @@
     <cate>tencent</cate>
     <page>13</page>
   </status>
-  <status>
+  <status id="14">
     <mid>8235123384684</mid>
     <text>#Google#的界面变的好漂亮...而且还有音乐，相比之下度娘就....</text>
     <time>2011-12-24 21:32:49</time>
@@ -140,7 +140,7 @@
     <cate>tencent</cate>
     <page>14</page>
   </status>
-  <status>
+  <status id="15">
     <mid>47650068805391</mid>
     <text>#Google#首页 好温馨的小圣诞歌~</text>
     <time>2011-12-24 21:18:09</time>
@@ -150,7 +150,7 @@
     <cate>tencent</cate>
     <page>15</page>
   </status>
-  <status>
+  <status id="16">
     <mid>30708070899871</mid>
     <text>#Google# 圣诞版Google徽标，挺好玩的。&#13;&lt;a href="http://url.cn/4fAzqj" target="_blank"&gt;http://url.cn/4fAzqj&lt;/a&gt; </text>
     <time>2011-12-24 21:10:46</time>
@@ -160,7 +160,7 @@
     <cate>tencent</cate>
     <page>16</page>
   </status>
-  <status>
+  <status id="17">
     <mid>41203035651615</mid>
     <text>每到节日的时候，#google# 总是那么有意思</text>
     <time>2011-12-24 20:04:47</time>
@@ -170,7 +170,7 @@
     <cate>tencent</cate>
     <page>17</page>
   </status>
-  <status>
+  <status id="18">
     <mid>120007094375765</mid>
     <text>一直在模仿#google#，但是从未超越。#百度#</text>
     <time>2011-12-24 19:08:04</time>
@@ -180,7 +180,17 @@
     <cate>tencent</cate>
     <page>18</page>
   </status>
-  <status>
+  <status id="19">
+    <mid>50150037277219</mid>
+    <text>#Google# 更新昨日 Logo 为互动奏乐形式庆祝聖诞節</text>
+    <time>2011-12-24 18:53:37</time>
+    <name>Moses</name>
+    <id>mosesofmason</id>
+    <image>http://app.qlogo.cn/mbloghead/fac5322e02f9279a45ac</image>
+    <cate>tencent</cate>
+    <page>19</page>
+  </status>
+    <status id="20">
     <mid>50150037277219</mid>
     <text>#Google# 更新昨日 Logo 为互动奏乐形式庆祝聖诞節</text>
     <time>2011-12-24 18:53:37</time>
