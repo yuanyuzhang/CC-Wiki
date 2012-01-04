@@ -1,0 +1,4 @@
+ccgroup以mediawik的插件的形式部署
+除了widgets和sql目录外，其它均部署到extension目录下面
+widgets为插件的源代码
+sql为数据库文件
