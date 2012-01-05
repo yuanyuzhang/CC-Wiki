@@ -24,6 +24,6 @@ var qqweibopost_key="801084572";
 var qqweibopost_secret="bae38f63379206f1054554c41dd81bf1";
 
 
-
+var siteForWidget="http://localhost/mediawiki-1.16.5/";
 
 

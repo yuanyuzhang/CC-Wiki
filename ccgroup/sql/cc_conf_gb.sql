@@ -37,7 +37,7 @@ CREATE TABLE `mw_cc_conf_gb` (
 
 LOCK TABLES `mw_cc_conf_gb` WRITE;
 /*!40000 ALTER TABLE `mw_cc_conf_gb` DISABLE KEYS */;
-INSERT INTO `mw_cc_conf_gb` VALUES ('keyword','meituan,lashou','丽江,lijiang','2011-12-31'),('iphone','meituan,','北京,beijing','2011-12-28');
+INSERT INTO `mw_cc_conf_gb` VALUES ('keyword','meituan,lashou','丽江,lijiang','2011-12-31'),('iphone','meituan,','北京,beijing','2011-12-28'),('','meituan,','大连,dalian','2022-3-6'),('Test','meituan','北京,beijing','2011-12-28');
 /*!40000 ALTER TABLE `mw_cc_conf_gb` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-12-30 13:37:09
+-- Dump completed on 2012-01-05 13:37:08

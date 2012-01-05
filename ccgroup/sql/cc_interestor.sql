@@ -29,7 +29,7 @@ CREATE TABLE `mw_cc_interestor` (
   `photo` varbinary(100) DEFAULT NULL,
   `email` varbinary(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `mw_cc_interestor` (
 
 LOCK TABLES `mw_cc_interestor` WRITE;
 /*!40000 ALTER TABLE `mw_cc_interestor` DISABLE KEYS */;
+INSERT INTO `mw_cc_interestor` VALUES (1,'','dfs','1325732113_pageen.jpg','fsdf'),(2,'','fsd','','fds'),(3,'','ccc','','fsd'),(4,'','fds','1325733159_pageen.jpg','fds'),(5,'','fcsd','1325733299_indexen.jpg','fsd');
 /*!40000 ALTER TABLE `mw_cc_interestor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-12-30 13:37:09
+-- Dump completed on 2012-01-05 13:37:08

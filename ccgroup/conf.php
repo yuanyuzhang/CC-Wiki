@@ -31,5 +31,7 @@ $sinaweibopost_secret="ebb21335547bac5b6366a44dc09ab1dc";
 $qqweibopost_key="801084572";
 $qqweibopost_secret="bae38f63379206f1054554c41dd81bf1";
 
+$access_token='2.004DZvHCOJAFtD48e7cc3f21aEzSdB';
+
 
 

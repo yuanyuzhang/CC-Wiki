@@ -31,7 +31,7 @@ CREATE TABLE `mw_cc_page` (
   `creator_photo` varbinary(100) DEFAULT NULL,
   `creator_email` varbinary(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `mw_cc_page` (
 
 LOCK TABLES `mw_cc_page` WRITE;
 /*!40000 ALTER TABLE `mw_cc_page` DISABLE KEYS */;
-INSERT INTO `mw_cc_page` VALUES (1,'云南','','0','yyzh','123','yuan@163.com'),(2,'yuan yuzhang','','0','yyzh','123','yuan@163.com'),(3,'杭  州','','0','yyzh','123','yuan@163.com'),(4,'CCNT Lab Zhejiang University','','0','yyzh','123','yuan@163.com');
+INSERT INTO `mw_cc_page` VALUES (1,'云南','','0','yyzh','123','yuan@163.com'),(2,'yuan yuzhang','','0','yyzh','123','yuan@163.com'),(3,'杭  州','','0','yyzh','123','yuan@163.com'),(4,'CCNT Lab Zhejiang University','','0','yyzh','123','yuan@163.com'),(5,'Ffffffffffff','CCCCC','RestaurantGB','Chen Jiaoyan','ffdsfs',''),(6,'Ffffffffffffaaa','fsdfds','RestaurantGB','fsd','/wew/s.jsp',''),(7,'Ffffffffffffffffffff','fsd','RestaurantGB','Chen Jiaoyan','',''),(8,'Test','自助','RestaurantGB','Tom','',''),(9,'Cccccccccccccc','fds','RestaurantGB','cccccccccc','1325733328_pageen.jpg','');
 /*!40000 ALTER TABLE `mw_cc_page` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-12-30 13:37:09
+-- Dump completed on 2012-01-05 13:37:08
