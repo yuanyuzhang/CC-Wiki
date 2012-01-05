@@ -2,11 +2,21 @@
 $ccHost="localhost";
 $ccPort="80";
 $ccSite="mediawiki-1.16.5";
+$ccDir='/var/www/html/';
 
 $ccDB="localhost";
 $ccDBName="mediawiki1_16";
 $ccDBUsername="root";
 $ccDBPassword="123456";
+
+
+$cc_conf_gb = "mw_cc_conf_gb";
+$cc_conf_wb = "mw_cc_conf_wb";
+$cc_interestor = "mw_cc_interestor";
+$cc_participator = "mw_cc_participator";
+$cc_page = "mw_cc_page";
+
+
 
 $renren_key="19a0752858534770898026f931bfa245";
 $renren_secret="2305726666c641d79ae579368b5652df";

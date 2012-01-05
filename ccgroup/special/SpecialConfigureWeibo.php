@@ -1,14 +1,16 @@
 <?php
-include ( 'conf.php');
+include ( '../conf.php');
 
 class SpecialConfigureWeibo extends SpecialPage {    
+
  	function __construct() {
         	parent::__construct( 'ConfigureWeibo' );
     	}
 
     	function execute( $par ) {
-         	global $wgRequest, $wgOut, $path;
-		global $ccHost, $ccPort, $ccSite, $ccDB, $ccDBUsername, $ccDBPassword, $ccDBName;
+         	global $wgRequest, $wgOut;
+		global $ccHost, $ccPort, $ccSite;
+		global $ccDB, $ccDBUsername, $ccDBPassword, $ccDBName, $cc_conf_wb;
 
         	$this->setHeaders();
 	
@@ -34,7 +36,7 @@ class SpecialConfigureWeibo extends SpecialPage {
                                         die('Could not connect: ' . mysql_error());
                                 }
                                 mysql_select_db($ccDBName, $con);
-                                mysql_query('UPDATE cc_conf_wb SET weibo="' .$this->sina.','.$this->tencent .'",time="' .$this->year. '-' .$this->month. '-' .$this->day. '" WHERE page_name="' .$this->page_name. '"');
+                                mysql_query('UPDATE ' .$cc_conf_wb. ' SET weibo="' .$this->sina.','.$this->tencent .'",time="' .$this->year. '-' .$this->month. '-' .$this->day. '" WHERE page_name="' .$this->page_name. '"');
                                 mysql_close( $con );
                         }
                         else{

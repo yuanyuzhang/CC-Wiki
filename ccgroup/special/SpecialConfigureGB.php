@@ -1,14 +1,16 @@
 <?php
-include ( 'conf.php');
+include ( '../conf.php');
+
 class SpecialConfigureGB extends SpecialPage {   
+
 	function __construct() {
         	parent::__construct( 'ConfigureGB' );
     	}
 
     	function execute( $par ) {
-        	global $wgRequest, $wgOut, $path;
+        	global $wgRequest, $wgOut;
 		global $ccHost, $ccPort, $ccSite;
-		global $ccDB, $ccDBName, $ccDBUsername, $ccDBPassword;
+		global $ccDB, $ccDBName, $ccDBUsername, $ccDBPassword, $cc_conf_gb;
 
         	$this->setHeaders();
 		
@@ -21,18 +23,13 @@ class SpecialConfigureGB extends SpecialPage {
 		$this->day = $wgRequest->getText( 'DD' );
 
 		$wgOut->addHTML( $this->makeForm( $this->page_name ) );
-	/*
-		$a = $_SERVER[ 'QUERY_STRING' ];
-		$query = explode( '&', $a );
-		$this->keyword = substr($query[0],8);*/
+		
 		if(($this->city!='')&&($this->meituan!=''||$this->lashou!='')){
 			$dbr = wfGetDB( DB_SLAVE );
 			$res = $dbr->select( 'cc_conf_gb', array( 'page_name' ),
 'page_name="' . $this->page_name . '"', __METHOD__, array( 'ORDER BY' => 'page_name ASC' ));
 			$s = $dbr->fetchObject( $res );
 			if( $s->page_name!=''){
-				//update
-//				$dbw = wfGetDB( DB_MASTER );
 				$con = mysql_connect($ccDB, $ccDBUsername, $ccDBPassword);
 				if (!$con)
   				{
@@ -40,10 +37,8 @@ class SpecialConfigureGB extends SpecialPage {
 				}
 
 				mysql_select_db($ccDBName, $con);
-				mysql_query('UPDATE cc_conf_gb SET web="' .$this->meituan.','.$this->lashou .'",city="' .$this->city. '",time="' .$this->year. '-' .$this->month. '-' .$this->day.  '" WHERE page_name="' .$this->page_name. '"');
+				mysql_query('UPDATE ' .$cc_conf_gb. ' SET web="' .$this->meituan.','.$this->lashou .'",city="' .$this->city. '",time="' .$this->year. '-' .$this->month. '-' .$this->day.  '" WHERE page_name="' .$this->page_name. '"');
 				mysql_close( $con );
-//				$dbw->update( 'cc_configureGB', array( 'web' => $this->meituan.'&'.$this->lashou, 'city' => $this->city, 'time' => $this->time),'title="' . $this->keyword . '"',  __METHOD__, 'IGNORE');
-//				$dbw->delete( 'cc_configureGB', 'title="' . $this->keyword . '"', __METHOD__ );
 			}
 			else{
 				//insert
@@ -60,13 +55,13 @@ class SpecialConfigureGB extends SpecialPage {
 		global $ccHost, $ccPort, $ccSite;
 
 		$dbr = wfGetDB( DB_SLAVE );
-                $res = $dbr->select( 'cc_page', array( 'keyword' ),
-'page_name="' . $page_name . '"', __METHOD__, 'IGNORE' );
+                $res = $dbr->select( 'cc_page', array( 'keyword' ), 'page_name="' . $page_name . '"', __METHOD__, 'IGNORE' );
                 $s = $dbr->fetchObject( $res );
                 
 		$title = self::getTitleFor( 'ConfigureGB' );
 		$form = '<fieldset><legend>' . wfMsgHtml( 'configuregb' ) . '</legend>';
 		$tmpUrl = 'http://' .$ccHost. ':' .$ccPort. '/' .$ccSite;
+	
 		//display page title and key word
 		$form .= '<div style="color:#00FF00">
 				<h3>Page Name: ' . $page_name . '</h3>
@@ -95,7 +90,6 @@ class SpecialConfigureGB extends SpecialPage {
  		        </select><br /><br />'; 
 		$form .= '<input type="reset" value="Reset" /> &nbsp &nbsp ';
 		$form .= Xml::submitButton( 'OK' );
-//		$form .= '<input type="submit" value="OK" />';
 		$form .= Xml::closeElement( 'form' );
 		$form .= '</filedset>';
 		$form .= $this->changeDate();

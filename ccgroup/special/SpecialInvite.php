@@ -1,7 +1,8 @@
 <?php
-include ( 'conf.php');
+include ( '../conf.php');
 
 class SpecialInvite extends SpecialPage {
+
         function __construct() {
                 parent::__construct( 'Invite' );
         }
@@ -46,11 +47,11 @@ class SpecialInvite extends SpecialPage {
 			$url = 'http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/kaixinFriend.php?access_token=' . $token; 
 		elseif($sns=='qq')
 			$url = 'http://' .$ccHost. ':' .$ccPort. '/' .$ccSite. '/extensions/ccgroup/includes/qqweiboFriend.php?oauth_token=' .$token. '&oauth_token_secret=' . $token_secret;
-	//	$wgOut->addWikiText( $url );
-                $doc = new DOMDocument(); 
+                
+		$doc = new DOMDocument(); 
                 $doc->load( $url );
                 $friends = $doc->getElementsByTagName( 'friend' );
-	//	$wgOut->addWikiText( $friends->length );
+
 		$form = Xml::openElement(  'form', array( 'method' => 'get', 'action' => $sendURL ));
                 $form .= Xml::openElement( 'table', array( 'border' => '0', 'cellpadding' => '20', 'id' => 'table1' ));
                 $form .= '<tbody id="table2">';
