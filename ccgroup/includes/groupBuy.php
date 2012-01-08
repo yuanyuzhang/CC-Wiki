@@ -8,8 +8,8 @@ $language=$_REQUEST['language'];
 //$language="北京,beijing";
 $language=explode(',', $language);
 $keyword=$_REQUEST['keyword'];
-$keywords=explode(',', $keyword);
 //$keyword="自助";
+$keywords=explode(',', $keyword);
 $endTime=$_REQUEST['endTime'];
 //$endTime="2011-12-30";
 $input=new DOMDocument();
@@ -28,11 +28,19 @@ elseif ($gbcompany=="lashou"){
 }
 $contents=json_decode($rurl,true);
 
-$input->load($gburl);
+$ch = curl_init($gburl);//打开
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+$response  = curl_exec($ch);
+curl_close($ch);//
+
+$input->loadXML($response);
 $input_datas=$input->getElementsByTagName($contents['data']);
 $i=1;
 foreach ($input_datas as $input_data){
+	
 	$title_value=$input_data->getElementsByTagName($contents['product']['title']);
+
 	$title_value=$title_value->item(0)->nodeValue;
 	$detail_value=$input_data->getElementsByTagName($contents['product']['description']);
 	$detail_value=$detail_value->item(0)->nodeValue;

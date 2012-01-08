@@ -38,6 +38,7 @@ function upload_image($imgpath)
 }
 
 $page_name = $_POST['page_name'];
+$gbUrl = $_POST['gbUrl'];
 $name = $_POST['name'];
 $email = $_POST['email'];
 $photo = $_FILES['photo'];
@@ -53,7 +54,7 @@ mysql_select_db( $ccDBName, $con );
 mysql_query( 'insert into ' .$cc_participator. ' (page_name, name, photo, email) values ("'.$page_name.'", "'.$name.'", "'.$photoName.'", "'.$email.'")' );
 mysql_close( $con );
 
-header('Location:http://' .$ccHost. ':' .$ccPort.'/' .$ccSite.'/index.php');
+header('Location:' .$gbUrl );
 ?>
 
 

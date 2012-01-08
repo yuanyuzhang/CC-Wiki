@@ -26,7 +26,7 @@ CREATE TABLE `mw_cc_class` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varbinary(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,6 @@ CREATE TABLE `mw_cc_class` (
 
 LOCK TABLES `mw_cc_class` WRITE;
 /*!40000 ALTER TABLE `mw_cc_class` DISABLE KEYS */;
-INSERT INTO `mw_cc_class` VALUES (1,'RestaurantGB');
 /*!40000 ALTER TABLE `mw_cc_class` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-01-05 13:37:08
+-- Dump completed on 2011-12-30 13:37:09

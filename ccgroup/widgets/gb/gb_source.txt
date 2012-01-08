@@ -1,0 +1,250 @@
+<noinclude>
+This widget allows you to add group buy information to your wiki page.
+
+It was originally created by [http://ccnt.zju.edu.cn/ CCNT LAB].
+== Using this widget ==
+For information on how to use this widget, see [http://www.mediawikiwidgets.org/Flickr widget description page on MediaWikiWidgets.org].
+
+== Copy to your site ==
+To use this widget on your site, just install [http://www.mediawiki.org/wiki/Extension:Widgets MediaWiki Widgets extension] and copy [{{fullurl:{{FULLPAGENAME}}|action=edit}} full source code] of this page to your wiki as '''{{FULLPAGENAME}}''' article.
+</noinclude>
+
+<includeonly>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/swfobject.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/jcarousellite_1.0.1.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/js/gb_pagenav.min.js"></script>
+
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/lib/jsoapclient.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/lib/jsoapclientparse.js"></script>
+
+
+<style type="text/css" media="screen">
+ol,ul,li { list-style:none;}
+i,em { font-style:normal;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#ff6f00;text-decoration:underline;}
+
+
+.pageNum{border: 1px solid #999;padding:2px 8px;display: inline-block; font-size:14px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.cPageNum{font-weight: bold;padding:1px 7px;border: 1px solid #34b6e6;background:#eaf7fd;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+#gb_pageNav {width:435px; margin-top:10px;} 
+#gb_pageNav a:hover{text-decoration:none;background:#eaf7fd; }
+#gb_pageNav { margin-bottom:10px; text-align:center;}
+
+#groupbuyinfo {width:431px;border:2px #34b6e6 solid;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; font-size:14px; background-color:#f5fbfd; margin-bottom:10px;}
+
+.tgname { line-height:30px; padding: 10px 0pt 9px 7px; font-size: 18px ;font-weight:bold; }
+.tgpic { text-align:center;}
+.tgdesc { padding:0 10px; line-height:22px; margin:0;}
+.tgbtn { height:40px; line-height:30px; font-size:16px; font-weight:bold; padding-top:10px; text-align:center}
+.delx { text-decoration:line-through; color:#666}
+.org { color:#F30;}
+.tg_btn { background:url(http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/images/tgbtn_back.png) repeat-x; border:1px #e02601 solid;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; font-size:16px; height:29px; line-height:29px; font-weight:bold; text-align:center; cursor:pointer; padding:4px 10px 3px 10px; }
+a.tg_btn ,a.tg_btn:link,a.tg_btn:visited,a.tg_btn:hover { color:#720c00;}
+
+.input150 { width:150px; background:url(http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/images/input_back.png) no-repeat; height:18px; border:1px #aaa solid; line-height:18px; text-indent:5px; border:1px #ccc solid;}
+#facesPhotoWrapper { padding:0 3px; margin:0; width:435px;}
+#facesPhotoWrapper img { padding:2px; margin:3px; border:1px #ccc solid;}
+
+</style>
+
+<script type="text/javascript"> $(document).ready(function () { var myOptions = { imagecount: 21, images: imageList } $("#facesPhotoWrapper").photofy(myOptions); }); </script>
+
+
+<script type="text/javascript">
+ var disqus_shortname = 'zxlzr'; // required: replace example with your forum shortname
+var disqus_developer = 1;
+disqus_url_tmp="http://";
+disqus_url="http://www.qq.com";
+
+　function createXml(str){ 
+
+　　if(document.all){ 
+
+　　var xmlDom=new ActiveXObject("Microsoft.XMLDOM") 
+
+　　xmlDom.loadXML(str) 
+
+　　return xmlDom 
+
+　　} 
+
+　　else 
+
+　　return new DOMParser().parseFromString(str, "text/xml") 
+
+　　} 
+
+
+
+function HtmlDecode(str) { 
+var t = document.createElement("div"); 
+t.innerHTML = str; 
+return t.innerText || t.textContent 
+} 
+
+ globalpicid="hello";//全局唯一标识
+
+$(document).ready(function() {
+
+ sum=0; 
+ 
+ sum=0;
+	 result="";
+
+        mydata = '{"data":[{"type":"xsd:string","value":"' + "Test" + '"}]}'; 
+        jQuery.jSOAPClient.setLocation('http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/service.php');
+	jQuery.jSOAPClient.setUrn('http://localhost');
+	jQuery.jSOAPClient.setSuccess(function(data){
+		result=HtmlDecode(data);
+               
+			$(createXml(result)).find('data').each(function(){
+						     sum=sum+1;
+			})
+			navegate_gb();
+	 
+		 
+	});
+	jQuery.jSOAPClient.setError(function(data){
+		document.write("Error: to call soap web service!");
+	});
+	jQuery.jSOAPClient.call('getGroupBuy',mydata);
+				
+	function navegate_gb(){
+	
+	gb_pageNav.pre="PRE";
+	gb_pageNav.next="NEXT";
+	
+	
+	gb_pageNav.fn = function(p,pn){
+	        
+						
+						$(createXml(result)).find('data').each(function(){
+							if($(this).children('page').text()==p){
+							var deal_title = $(this).children('title').text();
+							var deal_url = $(this).children('url').text();
+							var deal_img = $(this).children('image').text();
+							var deal_desc = $(this).children('detail').text();
+							var deal_price = $(this).children('price').text();
+							var deal_value = $(this).children('value').text();
+							globalpicid=$(this).children('id').text();
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+							 disqus_url_tmp='http://'+globalpicid;
+							
+
+var  info = '<div class=tgname>当日精选：'+deal_title+'</div><div class=tgpic><img src="'+deal_img+'" width="427" height="260" /></div><div class=tgdesc>'+deal_desc+'</div><div class=tgbtn><span class=delx>原价：'+deal_value+'元</span>&nbsp;&nbsp;<span class=org>>现价：'+deal_price+'元</span>&nbsp;&nbsp;<a href="'+deal_url+'" class=tg_btn>我>感兴趣</a>&nbsp;&nbsp;<a href="'+deal_url+'" class=tg_btn>我要购买</a></div>';
+
+
+							$('#groupbuyinfo').html(info);
+						
+							$("#file_upload").uploadifySettings('scriptData',{'pic':globalpicid});
+							
+							}
+							
+						})
+			
+				
+				//图片的 第二模块
+				
+	$.get("http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/getpiclist.php", { id: globalpicid},
+  function(data){
+                      
+                        var  info="";
+                           
+						$(data).find('pic').each(function(){
+						
+							var pic = $(this).text();
+						         
+							 info = info+'<img src="/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploads/'+globalpicid+'/'+pic+'" alt="" width="100" height="100" />';
+						
+						})
+						
+						$('#facesPhotoWrapper').html(info);				
+						
+  });
+  
+  //第三板块
+		
+ disqus_url=disqus_url_tmp;
+    //alert(disqus_url);
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+	
+		
+		
+	
+	};
+	
+	//goto the page 3 of 33.
+	gb_pageNav.go(1,sum);
+	
+}
+						
+				
+				
+	function getglobalpicid(){
+		return globalpicid;
+				
+	}
+				
+
+
+  $('#file_upload').uploadify({
+    'uploader'  : 'http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/uploadify.swf',
+    'script'    : 'http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/uploadify.php',
+    'cancelImg' : 'http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/cancel.png',
+    'folder'    : '/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploads',
+    'auto'      : true,
+	'scriptData'  : {'pic':globalpicid}, 
+    'method'         : 'GET', 
+	'onComplete': function(event, queueID, fileObj, response, data) {             //上传完成后的操作
+           
+			var info='';
+				   		$(response).find('pic').each(function(){
+							
+							var pic = $(this).text();
+							
+						
+							 info = info+'<img src="/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploads/'+globalpicid+'/'+pic+'" alt="" width="100" height="100" />';
+						
+							
+						
+						})
+						
+							$('#facesPhotoWrapper').html(info);
+				
+               }
+  });
+
+ 
+});
+
+
+
+</script>
+
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>groupbuy</title>
+		
+	</head>
+	<body>
+    
+	<div id="gb_pageNav" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"></div>
+    
+	<div id="groupbuyinfo" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"></div>
+    
+	<div class="photoup" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"><input name="file_upload" type="file" id="file_upload" size="50" maxlength="100" /></div>
+	<div id="facesPhotoWrapper" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"></div>
+	<div id="disqus_thread" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"></div>
+	<noscript style="width:<!--{$width|escape:'html'|default:'420'}-->px;">Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></body>
+	</body>
+</includeonly>
+

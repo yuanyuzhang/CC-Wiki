@@ -47,7 +47,7 @@ $server->register ( 'getGroupBuy',
 		array ("arg" => "xsd:string"),
 		array ("return" => "xsd:string" ) );
 $server->register ( 'weiboMashup',
-		array ("arg" => "xsd:string"),
+ 		array ("arg" => "xsd:string"),
 		array ("return" => "xsd:string" ) );
 $HTTP_RAW_POST_DATA=isset($HTTP_RAW_POST_DATA)?$HTTP_RAW_POST_DATA : '';
 $server->service($HTTP_RAW_POST_DATA);
@@ -118,9 +118,10 @@ function getqqweiboTrend($arg) {
 }
 */
 function weiboMashup($arg) {
-	/**
+ 	/**
 	 add cotents
 	 */	
+	$arg=urldecode($arg);
 	global $ccDB;
 	global $ccDBUsername;
 	global $ccDBPassword;
@@ -128,16 +129,26 @@ function weiboMashup($arg) {
 	global $ccHost;
 	global $ccPort;
 	global $ccSite;
-	$link=mysql_connect($ccDB,$ccDBUsername,$ccDBPassword);
+	global  $cc_conf_wb ;
+	global $cc_page;
+        $link=mysql_connect($ccDB,$ccDBUsername,$ccDBPassword);
 	if(!$link) echo "failed";
 	mysql_select_db($ccDBName,$link);
-	$sql="select * from  cc_conf_wb where page_name='$arg'";
+	$sql="select * from  ". $cc_conf_wb . " where page_name='$arg'";
 	$result=mysql_query($sql,$link);
 	$firstline=mysql_fetch_array($result);
-	$title=$arg;
-	$url=$firstline['weibo'];
+       
+         $url=$firstline['weibo'];
+
+        $sql="select * from ".$cc_page." where page_name='$arg'";
+	$result=mysql_query($sql,$link);
+	$firstline=mysql_fetch_array($result);
+	$title=$firstline['keyword'];
+         //return $title;
+
   $response=get("http://".$ccHost.":".$ccPort."/".$ccSite."/extensions/ccgroup/includes/weiboMashup.php?data=".$url."&title=".$title);
-  return $response;
+// $response=urlencode($response);  
+return $response;
 }
 /*
 function sinaRepost($arg) {
@@ -169,6 +180,7 @@ function qqweiboUpdate($arg) {
 	return $response;
 }
 function getGroupBuy($arg) {
+	$arg=urldecode($arg);
 	global $ccHost;
 	global $ccPort;
 	global $ccSite;
@@ -176,21 +188,21 @@ function getGroupBuy($arg) {
 	global $ccDBUsername;
 	global $ccDBPassword;
 	global $ccDBName;
+	global $cc_conf_gb ,$cc_page ;
 	$link=mysql_connect($ccDB,$ccDBUsername,$ccDBPassword);
 	if(!$link) echo "failed";
 	mysql_select_db($ccDBName,$link);
-	$sql="select * from  cc_conf_gb where page_name='$arg'";
+	$sql="select * from " . $cc_conf_gb . " where page_name='$arg'";
 	$result=mysql_query($sql,$link);
 	$firstline=mysql_fetch_array($result);
 	$gb=$firstline['web'];
 	$city=$firstline['city'];
 	$time=$firstline['time'];
-	$sql="select keyword from  cc_page where page_name='$arg'";
+	$sql="select keyword from ". $cc_page . " where page_name='$arg'";
 	$result=mysql_query($sql,$link);
 	$firstline=mysql_fetch_array($result);
 	$keyword=$firstline['keyword'];
-	
 	$response=get("http://".$ccHost.":".$ccPort."/".$ccSite."/extensions/ccgroup/includes/groupBuy.php?gb=".$gb."&language=".$city."&keyword=".$keyword."&endTime=".$time);
-	return $response;
+ 	return $response;
 }
 ?>

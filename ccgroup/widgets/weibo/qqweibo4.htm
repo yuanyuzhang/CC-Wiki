@@ -1,0 +1,59 @@
+<html>
+
+<head>
+
+<title></title>
+<script type="text/javascript" src="../../conf.js"></script>
+<script type="text/javascript" src="../../scripts/function.js"></script>
+<script type="text/javascript" src="../../scripts/crypto.js"></script>
+<script type="text/javascript" src="../../scripts/sha1.js"></script>
+<script type="text/javascript" src="../../scripts/hmac.js"></script>
+<script type="text/javascript" src="../../scripts/OAuth.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+var url="https://open.t.qq.com/cgi-bin/access_token";
+var oauth_consumer_key=qqweibopost_key;
+var oauth_signature_method="HMAC-SHA1";
+var oauth_timestamp=OAuth.timestamp();
+var oauth_nonce=OAuth.nonce(32);
+var oauth_version="1.0";
+var oauth_signature="";
+var secret=qqweibopost_secret;
+var oauth_token_secret=getContent("session",proxy);
+var arg=getArg(1);
+oauth_token = arg.split("&")[0]; 
+oauth_token=oauth_token.split("=")[1];
+oauth_verifier=arg.split("&")[1]; 
+oauth_verifier=oauth_verifier.split("=")[1];
+var url_encode=encodeURIComponent(url);
+oauth_consumer_key=encodeURIComponent(oauth_consumer_key);
+oauth_nonce=encodeURIComponent(oauth_nonce);
+oauth_signature_method=encodeURIComponent(oauth_signature_method);
+oauth_timestamp=encodeURIComponent(oauth_timestamp);
+oauth_token=encodeURIComponent(oauth_token);
+oauth_verifier=encodeURIComponent(oauth_verifier);
+oauth_version=encodeURIComponent(oauth_version);
+var parameter="oauth_consumer_key="+oauth_consumer_key+"&"+"oauth_nonce="+oauth_nonce+"&"+"oauth_signature_method="+oauth_signature_method+"&"+"oauth_timestamp="+oauth_timestamp+"&"+"oauth_token="+oauth_token+"&"+"oauth_verifier="+oauth_verifier+"&"+"oauth_version="+oauth_version;
+var parameter_encode=encodeURIComponent(parameter);
+var sig_content="POST"+"&"+url_encode+"&"+parameter_encode;
+oauth_token_secret=encodeURIComponent(oauth_token_secret);
+var bytes=Crypto.HMAC(Crypto.SHA1,sig_content,secret+"&"+oauth_token_secret,{asBytes:true});
+oauth_signature=Crypto.util.bytesToBase64(bytes); 
+var request_parameter="oauth_consumer_key="+oauth_consumer_key+"&"+"oauth_nonce="+oauth_nonce+"&"+"oauth_signature="+oauth_signature+"&"+"oauth_signature_method="+oauth_signature_method+"&"+"oauth_timestamp="+oauth_timestamp+"&"+"oauth_token="+oauth_token+"&"+"oauth_verifier="+oauth_verifier+"&"+"oauth_version="+oauth_version;
+var access=getContent(url+"&"+request_parameter,proxy);
+oauth_token=access.split("&")[0];
+oauth_token=oauth_token.split("=")[1]; 
+oauth_token_secret=access.split("&")[1]; 
+oauth_token_secret=oauth_token_secret.split("=")[1];
+getContent("qqweibosession&qqweibo_access_token="+oauth_token+"&qqweibo_access_token_secret="+oauth_token_secret,proxy);
+</script>
+<script type="text/javascript">
+window.open('','_parent','');
+window.close();
+</script>
+
+</body>
+
+</html>

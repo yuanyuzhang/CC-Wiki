@@ -1,5 +1,5 @@
 <?php
-
+include '../conf.php';
 function convertTime($t){
 	$month=array(
 			"Jan"=>1,
@@ -32,7 +32,7 @@ function convertTime($t){
 }
 //$access_token=$_REQUEST['access_token'];
 $trend=$_REQUEST['trend'];
-$access_token="2.004DZvHCbgY9OBb4ab7991140KQLEL";
+//$access_token="2.004DZvHCbgY9OBb4ab7991140KQLEL";
 //$trend='baidu';
 $url="https://api.weibo.com/2/trends/statuses.json?trend=".$trend."&access_token=".$access_token;
 $ch = curl_init($url);//打开

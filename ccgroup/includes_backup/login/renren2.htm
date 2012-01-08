@@ -1,0 +1,29 @@
+<html>
+
+<head>
+
+<title>log in successfully </title>
+<script type="text/javascript" src="../../conf.js"></script>
+<script type="text/javascript" src="../../scripts/function.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+var authorization_code=getArg(1);     
+var url="http://graph.renren.com/oauth/token";   
+var client_id=renren_key;  
+var client_secret=renren_secret;
+var redirect_uri=renren_redirect;
+grant_type="authorization_code";
+url=url+"&"+"client_id="+client_id+"&"+"client_secret="+client_secret+"&"+"redirect_uri="+redirect_uri+"&"+"grant_type="+grant_type+"&"+authorization_code;
+var result=getContent(url,proxy);            
+var obj=eval('('+result+')');        
+document.write(obj.access_token); 
+</script>
+<script type="text/javascript">
+window.location.href="http://"+ccHost+":"+ccPort+"/"+ccSite+"/index.php/Special:Invite?type=renren&access_token="+obj.access_token;
+
+</script>
+</body>
+
+</html>
+

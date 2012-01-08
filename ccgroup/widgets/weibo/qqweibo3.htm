@@ -1,0 +1,44 @@
+<html>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+
+<title></title>
+<script type="text/javascript" src="../../conf.js"></script>
+<script type="text/javascript" src="../../scripts/function.js"></script>
+<script type="text/javascript" src="../../scripts/crypto.js"></script>
+<script type="text/javascript" src="../../scripts/sha1.js"></script>
+<script type="text/javascript" src="../../scripts/hmac.js"></script>
+<script type="text/javascript" src="../../scripts/OAuth.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" charset = "utf-8">
+var url="https://open.t.qq.com/cgi-bin/request_token";
+var login_url="https://open.t.qq.com/cgi-bin/authorize";
+var oauth_callback=encodeURIComponent(qqweibopost_redirect);
+var oauth_consumer_key=qqweibopost_key;
+var oauth_nonce=OAuth.nonce(32);
+var oauth_signature_method="HMAC-SHA1";
+var oauth_timestamp=OAuth.timestamp();
+var oauth_version="1.0";
+var oauth_signature="";
+var secret=qqweibopost_secret;
+var url_encode=encodeURIComponent(url);
+var parameter="oauth_callback="+oauth_callback+"&"+"oauth_consumer_key="+oauth_consumer_key+"&"+"oauth_nonce="+oauth_nonce+"&"+"oauth_signature_method="+oauth_signature_method+"&"+"oauth_timestamp="+oauth_timestamp+"&"+"oauth_version="+oauth_version;
+var parameter_encode=encodeURIComponent(parameter);
+var oauth_content="POST"+"&"+url_encode+"&"+parameter_encode;
+var bytes=Crypto.HMAC(Crypto.SHA1,oauth_content,secret+"&",{asBytes:true});
+oauth_signature=Crypto.util.bytesToBase64(bytes); 
+var request_url="oauth_consumer_key="+oauth_consumer_key+"&"+"oauth_signature_method="+oauth_signature_method+"&"+"oauth_signature="+oauth_signature+"&"+"oauth_timestamp="+oauth_timestamp+"&"+"oauth_nonce="+oauth_nonce+"&"+"oauth_callback="+oauth_callback+"&"+"oauth_version="+oauth_version;  
+var request_token_result=getContent(url+"&"+request_url,proxy); 
+oauth_token = request_token_result.split("&")[0]; 
+oauth_token_secret=request_token_result.split("&")[1];
+getContent("session&"+oauth_token_secret,proxy);
+</script>
+<script type="text/javascript">
+window.location.href = login_url+"?"+oauth_token;
+</script>
+</body>
+
+</html>

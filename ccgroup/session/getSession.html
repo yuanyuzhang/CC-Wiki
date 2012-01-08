@@ -1,0 +1,24 @@
+<script type="text/javascript" src="../scripts/function.js"></script>
+<script>
+var url = "http://localhost/mediawiki-1.16.5/extensions/ccgroup/session/getSession.php";
+
+var test = getContent("", url);
+
+if (window.DOMParser)
+{
+  parser=new DOMParser();
+  xmlDoc=parser.parseFromString(test,"text/xml");
+}
+else // Internet Explorer
+{
+  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+  xmlDoc.async="false";
+  xmlDoc.loadXML(test);
+}
+
+var page_name = xmlDoc.getElementsByTagName("page_name")[0].childNodes[0].nodeValue;
+var keyword = xmlDoc.getElementsByTagName("gbTitle")[0].childNodes[0].nodeValue;
+var address = xmlDoc.getElementsByTagName("address")[0].childNodes[0].nodeValue;
+
+document.write(page_name+"&"+keyword+"&"+address);
+</script>

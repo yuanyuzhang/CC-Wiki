@@ -1,0 +1,27 @@
+<html>
+
+<head>
+
+<title> log in successfully </title>
+<script type="text/javascript" src="../../conf.js"></script>
+<script type="text/javascript" src="../../scripts/function.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+var authorization_code=getArg(1);        //获得url中的code参数
+var url="https://api.weibo.com/oauth2/access_token";
+var client_id=sinaweibo_key;
+var client_secret=sinaweibo_secret;
+var grant_type="authorization_code";
+var redirect_uri=sinaweibo_redirect;
+var post_data="client_id="+client_id+"&"+"client_secret="+client_secret+"&"+"grant_type="+grant_type+"&"+"redirect_uri="+redirect_uri+"&"+authorization_code;
+var access_token_result=getContent(url+"&"+post_data,proxy);
+var obj=eval('('+access_token_result+')');
+</script>
+<script type="text/javascript">
+window.location.href="http://"+ccHost+":"+ccPort+"/"+ccSite+"/index.php/Special:Invite?type=sinaweibo&access_token="+obj.access_token;
+</script>
+
+</body>
+</html>

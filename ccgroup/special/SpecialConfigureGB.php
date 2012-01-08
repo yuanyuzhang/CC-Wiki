@@ -18,9 +18,7 @@ class SpecialConfigureGB extends SpecialPage {
 		$this->meituan = $wgRequest->getText( 'meituan' );
 		$this->lashou = $wgRequest->getText( 'lashou' );
 		$this->city = $wgRequest->getText( 'city' );
-		$this->year = $wgRequest->getText( 'YYYY' );
-		$this->month = $wgRequest->getText( 'MM' );
-		$this->day = $wgRequest->getText( 'DD' );
+		$this->time = $wgRequest->getText( 'time' );
 
 		$wgOut->addHTML( $this->makeForm( $this->page_name ) );
 		
@@ -37,13 +35,13 @@ class SpecialConfigureGB extends SpecialPage {
 				}
 
 				mysql_select_db($ccDBName, $con);
-				mysql_query('UPDATE ' .$cc_conf_gb. ' SET web="' .$this->meituan.','.$this->lashou .'",city="' .$this->city. '",time="' .$this->year. '-' .$this->month. '-' .$this->day.  '" WHERE page_name="' .$this->page_name. '"');
+				mysql_query('UPDATE ' .$cc_conf_gb. ' SET web="' .$this->meituan.','.$this->lashou .'",city="' .$this->city. '",time="' .$this->time. '" WHERE page_name="' .$this->page_name. '"');
 				mysql_close( $con );
 			}
 			else{
 				//insert
 				$dbw = wfGetDB( DB_MASTER );
-				$dbw->insert( 'cc_conf_gb', array('page_name' => $this->page_name, 'web' => $this->meituan.','.$this->lashou, 'city' => $this->city, 'time' => $this->year. '-' .$this->month. '-' .$this->day), __METHOD__, 'IGNORE');
+				$dbw->insert( 'cc_conf_gb', array('page_name' => $this->page_name, 'web' => $this->meituan.','.$this->lashou, 'city' => $this->city, 'time' => $this->time), __METHOD__, 'IGNORE');
 			}
 			
 			$tmpUrl = 'http://' .$ccHost. ':' .$ccPort. '/' .$ccSite;
@@ -75,77 +73,141 @@ class SpecialConfigureGB extends SpecialPage {
 		$form .= '<input type="checkbox" name="lashou" value="lashou"><img height="40" width="90" src="http://tuangou.kgkl.cn/uploads/allimg/110515/13522224a-0.jpg" /></input> &nbsp';
 		$form .= '<input type="checkbox" name="nuomi" value="nuomi"><img height="40" width="90" src="http://a0.att.hudong.com/40/12/01300000802987127902125845364.jpg" /></input> &nbsp';
 		$form .= '<input type="checkbox" name="58" value="58"><img height="40" width="90" src="http://img.ev123.com/pic/server/200_200/285/569679_logo.jpg" /></input> &nbsp';
-		$form .= '<input type="checkbox" name="wowo" value="wowo"><img height="40" width="90" src="http://tuan1212.com/jinrituangou/img/55tuan.jpg" /></input><br /><br />';
+		$form .= '<input type="checkbox" name="wowo" value="wowo"><img height="40" width="90" src="http://tuan1212.com/jinrituangou/img/55tuan.jpg" /></input><br /><br /><br />';
 		//select city
 		$form .= 'Select City:'.$this->makeList().'<br /><br />';	
-		$form .= 'Select Time:
-			<select    name="YYYY"    onchange="YYYYDD(this.value)">   
-			<option    value="">=year=</option>   
-			</select>   
-		        <select    name="MM"        onchange="MMDD(this.value)">   
-		        <option    value="">=month=</option>   
- 		        </select>   
-                        <select    name="DD">   
-                        <option    value="">=day=</option>   
- 		        </select><br /><br />'; 
+		$form .= $this->selectTime().'<br />';
+		$form .= 'Select Date: <input type="text" name="time" id="date-input" /><br /><br />';
 		$form .= '<input type="reset" value="Reset" /> &nbsp &nbsp ';
 		$form .= Xml::submitButton( 'OK' );
 		$form .= Xml::closeElement( 'form' );
 		$form .= '</filedset>';
-		$form .= $this->changeDate();
 		$form .= $this->changeList();
 		return $form;
 	}
-	private function changeDate() {
-		$out = '<script    language="JavaScript">
-   function    YYYYMMDDstart()   
-   {   
-           MonHead    =    [31,    28,    31,    30,    31,    30,    31,    31,    30,    31,    30,    31];   
-    
-           var    y        =    new    Date().getFullYear();   
-           for    (var    i    =    (y-3);    i    <    (y+30);    i++) 
-                   document.form1.YYYY.options.add(new    Option(""+i,  i));   
-    
-           for    (var    i    =    1;    i    <    13;    i++)   
-                   document.form1.MM.options.add(new    Option( ""+ i,   i));   
-    
-           var    n    =    MonHead[new    Date().getMonth()];   
-           if    (new    Date().getMonth()    ==1    &&    IsPinYear(YYYYvalue))    n++;   
-                   writeDay(n);   
-   }   
-   if(document.attachEvent)   
-       window.attachEvent("onload",    YYYYMMDDstart);   
-   else   
-       window.addEventListener("load",    YYYYMMDDstart,    false);   
-   function    YYYYDD(str)       
-   {   
-           var    MMvalue    =    document.form1.MM.options[document.form1.MM.selectedIndex].value;   
-           if    (MMvalue    ==    ""){    var    e    =    document.form1.DD;    optionsClear(e);    return;}   
-           var    n    =    MonHead[MMvalue    -    1];   
-           if    (MMvalue    ==2    &&    IsPinYear(str))    n++;   
-                   writeDay(n)   
-   }   
-   function    MMDD(str)        
-   {   
-           var    YYYYvalue    =    document.form1.YYYY.options[document.form1.YYYY.selectedIndex].value;   
-           if    (YYYYvalue    ==    ""){    var    e    =    document.form1.DD;    optionsClear(e);    return;}   
-           var    n    =    MonHead[str    -    1];   
-           if    (str    ==2    &&    IsPinYear(YYYYvalue))    n++;
-                   writeDay(n)   
-   }   
-   function    writeDay(n)      
-   {   
-           var    e    =    document.form1.DD;    optionsClear(e);   
-           for    (var    i=1;    i<(n+1);    i++)   
-                   e.options.add(new    Option(""+i,    i));   
-   }   
-   function    IsPinYear(year)  
-   {        return(0    ==    year%4    &&    (year%100    !=0    ||    year%400    ==    0));}   
-   function    optionsClear(e)   
-   {   
-           e.options.length    =    1;   
-   }   
-   </script>';
+
+	private function selectTime() {
+		$out = '<style>
+.date-picker-wp {
+display: none;
+position: absolute;
+background: #f1f1f1;
+left: 40px;
+top: 40px;
+border-top: 4px solid #3879d9;
+}
+.date-picker-wp table {
+border: 1px solid #ddd;
+}
+.date-picker-wp td {
+background: #fafafa;
+width: 22px;
+height: 18px;
+border: 1px solid #ccc;
+font-size: 12px;
+text-align: center;
+}
+.date-picker-wp td.noborder {
+border: none;
+background: none;
+}
+.date-picker-wp td a {
+color: #1c93c4;
+text-decoration: none;
+}
+.strong {font-weight: bold}
+.hand {cursor: pointer; color: #3879d9}
+</style>
+  <script type="text/javascript">
+var DatePicker = function () {
+var $ = function (i) {return document.getElementById(i)},
+addEvent = function (o, e, f) {o.addEventListener ? o.addEventListener(e, f, false) : o.attachEvent("on"+e, function(){f.call(o)})},
+getPos = function (el) {
+for (var pos = {x:0, y:0}; el; el = el.offsetParent) {
+pos.x += el.offsetLeft;
+pos.y += el.offsetTop;
+}
+return pos;
+}
+var init = function (n, config) {
+window[n] = this;
+Date.prototype._fd = function () {var d = new Date(this); d.setDate(1); return d.getDay()};
+Date.prototype._fc = function () {var d1 = new Date(this), d2 = new Date(this); d1.setDate(1); d2.setDate(1); d2.setMonth(d2.getMonth()+1); return (d2-d1)/86400000;};
+this.n = n;
+this.config = config;
+this.D = new Date;
+this.el = $(config.inputId);
+this.el.title = this.n+"DatePicker";
+this.update();
+this.bind();
+}
+init.prototype = {
+update : function (y, m) {
+var con = [], week = ["Su","Mo","Tu","We","Th","Fr","Sa"], D = this.D, _this = this;
+fn = function (a, b) {return "<td title=\""+_this.n+"DatePicker\" class=\"noborder hand\" onclick=\""+_this.n+".update("+a+")\">"+b+"</td>"},
+_html = "<table cellpadding=0 cellspacing=2>";
+y && D.setYear(D.getFullYear() + y);
+m && D.setMonth(D.getMonth() + m);
+var year = D.getFullYear(), month = D.getMonth() + 1, date = D.getDate();
+for (var i=0; i<week.length; i++) con.push("<td title=\""+this.n+"DatePicker\" class=\"noborder\">"+week[i]+"</td>");
+for (var i=0; i<D._fd(); i++ ) con.push("<td title=\""+this.n+"DatePicker\" class=\"noborder\"> </td>");
+for (var i=0; i<D._fc(); i++ ) con.push("<td class=\"hand\" onclick=\""+this.n+".fillInput("+year+", "+month+", "+(i+1)+")\">"+(i+1)+"</td>");
+var toend = con.length%7;
+if (toend != 0) for (var i=0; i<7-toend; i++) con.push("<td class=\"noborder\"> </td>");
+_html += "<tr>"+fn("-1, null", "<<")+fn("null, -1", "<")+"<td title=\""+this.n+"DatePicker\" colspan=3 class=\"strong\">"+year+"/"+month+"/"+date+"</td>"+fn("null, 1", ">")+fn("1, null", ">>")+"</tr>";
+for (var i=0; i<con.length; i++) _html += (i==0 ? "<tr>" : i%7==0 ? "</tr><tr>" : "") + con[i] + (i == con.length-1 ? "</tr>" : "");
+!!this.box ? this.box.innerHTML = _html : this.createBox(_html);
+},
+fillInput : function (y, m, d) {
+var s = this.config.seprator || "/";
+this.el.value = y + s + m + s + d;
+this.box.style.display = "none";
+},
+show : function () {
+var s = this.box.style, is = this.mask.style;
+s["left"] = is["left"] = getPos(this.el).x + "px";
+s["top"] = is["top"] = getPos(this.el).y + this.el.offsetHeight + "px";
+s["display"] = is["display"] = "block";
+is["width"] = this.box.offsetWidth - 2 + "px";
+is["height"] = this.box.offsetHeight - 2 + "px";
+},
+hide : function () {
+this.box.style.display = "none";
+this.mask.style.display = "none";
+},
+bind : function () {
+var _this = this;
+addEvent(document, "click", function (e) {
+e = e || window.event;
+var t = e.target || e.srcElement;
+if (t.title != _this.n+"DatePicker") {_this.hide()} else {_this.show()}
+})
+},
+createBox : function (html) {
+var box = this.box = document.createElement("div"), mask = this.mask = document.createElement("iframe");
+box.className = this.config.className || "datepicker";
+mask.src = "javascript:false";
+mask.frameBorder = 0;
+box.style.cssText = "position:absolute;display:none;z-index:9999";
+mask.style.cssText = "position:absolute;display:none;z-index:9998";
+box.title = this.n+"DatePicker";
+box.innerHTML = html;
+document.body.appendChild(box);
+document.body.appendChild(mask);
+return box;
+}
+}
+return init;
+}();
+onload = function () {
+new DatePicker("_DatePicker_demo", {
+inputId: "date-input",
+className: "date-picker-wp",
+seprator: "-"
+});
+new DatePicker("_demo2", {inputId: "demo2", className: "date-picker-wp"})
+}
+</script>';
 		return $out;
 	}
 

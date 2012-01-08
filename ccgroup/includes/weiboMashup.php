@@ -3,22 +3,23 @@ include '../conf.php';
 $data=$_REQUEST["data"];
 $title=$_REQUEST["title"];
 //$data="tencent,sina";
-//$title="baidu";
-$hash=array("tencent"=>"http://".$ccHost.":".$ccPort."/".$ccSite."/extensions/ccgroup/includes/qqweiboTrend.php?httext=".$title,"sina"=>"http://".$ccHost.":".$ccPort."/".$ccSite."/extensions/ccgroup/includes/sinaweiboTrend.php?trend=".$title);
+//$title="baidu,iphone";
+$hash=array("tencent"=>"http://".$ccHost.":".$ccPort."/".$ccSite."/extensions/ccgroup/includes/qqweiboTrend.php?httext=","sina"=>"http://".$ccHost.":".$ccPort."/".$ccSite."/extensions/ccgroup/includes/sinaweiboTrend.php?trend=");
 $data=explode(",", $data);
+$titles=explode(",", $title);
 $urls=array();
 $length=count($data);
 for($i=0;$i<$length;$i++){
 	$urls[]=$hash[$data[$i]];
 }
-
 //$urls=array("http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/qqweiboTrend.php","http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/sinaweiboTrend.php");
 $doc=new DOMDocument('1.0','UTF-8');
 $doc->formatOutput=true;
 $root=$doc->createElement("statuses");
 $doc->appendChild($root);
 foreach ($urls as $url){
-	$ch = curl_init($url);//打开
+	foreach ($titles as $title){
+	$ch = curl_init($url.$title);//打开
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 	$response  = curl_exec($ch);
@@ -62,6 +63,7 @@ foreach ($urls as $url){
 	$status->appendChild($cate);
 	$status->appendChild($page);
 	$root->appendChild($status);
+	}
 	}
 }
 $gbdata=$doc->saveXML();

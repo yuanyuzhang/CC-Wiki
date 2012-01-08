@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+.cityList{height: 320px;width:372px;overflow-y:auto;}
+
+    .sel_container{position:absolute;top:0;font-size:12px;}
+
+    .map_popup {position: absolute;z-index: 200000;width: 382px;height: 344px;top:20px;}
+
+    .map_popup .popup_main { background:#fff;border: 1px solid #8BA4D8;height: 100%;overflow: hidden;position: absolute;width: 100%;z-index: 2;}
+
+    .map_popup .title {background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
+
+    color: #6688CC;font-size: 12px;font-weight: bold;height: 24px;line-height: 25px;padding-left: 7px;}
+
+    .map_popup button {background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;border: 0 none;cursor: pointer;height: 12px;position: absolute;right: 4px;top: 6px;width: 12px;}
+	
+	#dvPolicy { padding-left:10px; margin-top:10px;}
+	#dvPolicy input { vertical-align:middle;}
+	.busfrom { padding-left:10px; line-height:30px;}
+	#results {  margin-top:10px;width:400px; }
+	#results .error { border-bottom:1px #ccc solid;border-top:1px #ccc solid;line-height:39px;padding: 10px 0pt 9px 7px; font: bold 16px arial,simsun,sans-serif;}
+	
+	.mapbtn {background:url(../images/mapbtn_back.png) repeat-x; border:1px #0058b2 solid;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; font-size:14px; height:29px; line-height:28px; font-weight:bold; text-align:center; cursor:pointer; padding:0px 10px; color:#fff;}
+	
+	
+	
+	

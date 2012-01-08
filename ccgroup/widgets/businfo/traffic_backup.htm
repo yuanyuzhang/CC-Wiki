@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>公交导航</title>
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/businfo.css" />
+<script src="../js/jquery-1.7.1.min.js"></script>
+
+</head>
+
+
+
+<body>
+
+<div class=" m_t5 m_b5"><input name="" type="button" value="自己输内容吧"  class="mapbtn"/></div>
+
+<div style="width:400px;height:300px;border:1px solid #000;margin-top:10px;margin-bottom:10px;" id="container"></div>
+
+<div class="sel_container" style="display:none;"></div>
+
+
+
+<div class="busfrom">起点：<input type="text" id="from" class="input100"/>&nbsp;&nbsp;终点：<input type="text" id="to" class="input100"/>&nbsp;<input name="" type="button" value="搜索" class="btn_search" id="check_route"/></div>
+
+<div id="panel"> </div>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+
+<script type="text/javascript" >
+
+
+cityname="杭州";
+// 新创建地图
+
+map = new BMap.Map("container");
+
+//map.centerAndZoom(new BMap.Point(116.395645, 39.929986), 12);
+map.centerAndZoom(cityname, 12);
+
+
+ $("#check_route").click(function(){
+
+
+ 
+
+    //var map = new BMap.Map("container");
+    //map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+   // map.enableScrollWheelZoom();
+    var start = $("#from").val() ,end = $("#to").val() ,routePolicy = [BMAP_TRANSIT_POLICY_LEAST_TIME,BMAP_TRANSIT_POLICY_LEAST_TRANSFER,BMAP_TRANSIT_POLICY_LEAST_WALKING];
+    var arrInput = document.getElementById("dvPolicy").getElementsByTagName("input");
+    search(start,end,routePolicy[0]);
+    document.getElementById("dvPolicy").onclick = function(e){   
+        e = e || window.event;
+        var elem = e.srcElement || e.target , policyIndex;       
+        if(elem.tagName.toLowerCase() == "input"){
+            policyIndex = elem.getAttribute("id").replace("policy","");             
+            map.clearOverlays();
+            search(start,end,routePolicy[policyIndex]);             
+        }
+    }
+
+  
+  
+  
+});
+   
+    function search(start,end,route){ 
+        var transit = new BMap.TransitRoute(cityname,{
+            renderOptions: {map: map,panel:"results"}, 
+            policy: route,
+			
+			
+			
+			
+			 
+    onSearchComplete: function(result) {
+        if (transit.getStatus()!=BMAP_STATUS_SUCCESS) {
+          $("#results").html("没有找到指定的公交导航路线");
+        }
+    }
+			
+		
+			
+			
+        });
+        transit.search(start,end);
+		var aa=transit.getResults();
+		
+		
+    }
+
+
+</script>
+
+
+<div id="dvPolicy"> <input id="policy0" checked="true" type="radio" name="pickPolicy"/>&nbsp;较便捷&nbsp;&nbsp;<input id="policy1" type="radio" name="pickPolicy"/>&nbsp;可换乘&nbsp;&nbsp;<input id="policy2" type="radio" name="pickPolicy"/>&nbsp;少步行</div> 
+<div id="results" ></div>
+
+
+</body>
+
+</html>

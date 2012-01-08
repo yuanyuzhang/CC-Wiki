@@ -1,53 +1,92 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><link href="./uploadify/uploadify.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="./uploadify/swfobject.js"></script>
-<script type="text/javascript" src="./uploadify/jquery.uploadify.v2.1.4.min.js"></script>
-<script type="text/javascript" src="jcarousellite_1.0.1.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/swfobject.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/jcarousellite_1.0.1.js"></script>
+<script src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/js/pagenav.min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/gb/jquery-photofy.min.js"></script> 
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/lib/jsoapclient_gb.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/lib/jsoapclientparse.js"></script>
 
-<script src="../js/pagenav.min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/session/saveSession.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/scripts/function.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/conf.js"></script>
+
+<link rel="stylesheet" href="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/css/common.css">
 <style type="text/css" media="screen">
-a { color:#2B4A78; text-decoration:none; }
-	a:hover { color:#2B4A78;text-decoration:underline; }
-	a:focus, input:focus {outline-style:none; outline-width:medium; }
+ol,ul,li { list-style:none;}
+i,em { font-style:normal;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#ff6f00;text-decoration:underline;}
 
-/* custom css style: pageNum,cPageNum */
-.pageNum{border: 1px solid #999;padding:2px 8px;display: inline-block;}
-.cPageNum{font-weight: bold;padding:2px 5px;}
-#pageNav a:hover{text-decoration:none;background: #fff4d8; }
 
+.pageNum{border: 1px solid #999;padding:2px 8px;display: inline-block; font-size:14px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.cPageNum{font-weight: bold;padding:1px 7px;border: 1px solid #34b6e6;background:#eaf7fd;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+#pageNav {width:435px; margin-top:10px;} 
+#pageNav a:hover{text-decoration:none;background:#eaf7fd; }
+#pageNav { margin-bottom:10px; text-align:center;}
+
+#groupbuyinfo {width:431px;border:2px #34b6e6 solid;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; font-size:14px; background-color:#f5fbfd; margin-bottom:10px;}
+
+.tgname { line-height:30px; padding: 10px 0pt 9px 7px; font-size: 18px ;font-weight:bold; }
+.tgpic { text-align:center;}
+.tgdesc { padding:0 10px; line-height:22px; margin:0;}
+.tgbtn { height:40px; line-height:30px; font-size:16px; font-weight:bold; padding-top:10px; text-align:center}
+.delx { text-decoration:line-through; color:#666}
+.org { color:#F30;}
+.tg_btn { background:url(http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/images/tgbtn_back.png) repeat-x; border:1px #e02601 solid;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; font-size:16px; height:29px; line-height:29px; font-weight:bold; text-align:center; cursor:pointer; padding:4px 10px 3px 10px; }
+a.tg_btn ,a.tg_btn:link,a.tg_btn:visited,a.tg_btn:hover { color:#720c00;}
+
+.input150 { width:150px; background:url(http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/images/input_back.png) no-repeat; height:18px; border:1px #aaa solid; line-height:18px; text-indent:5px; border:1px #ccc solid;}
+#facesPhotoWrapper { padding:0 3px; margin:0; width:435px;}
+#facesPhotoWrapper img { padding:2px; margin:3px; border:1px #ccc solid;}
+
+
+#btn { text-align:right;width:435px;}
+.btn_01 {background:url(../images/btn_back2.png) repeat-x; height:19px;-moz-border-radius:2px;-khtml-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; border:1px #0075b0 solid; cursor:pointer; color:#fff; margin-top:5px;}
 </style>
-<script type="text/javascript" src="jquery-photofy.min.js"></script> 
+
+
+
+
+
+
+
 <script type="text/javascript"> $(document).ready(function () { var myOptions = { imagecount: 21, images: imageList } $("#facesPhotoWrapper").photofy(myOptions); }); </script>
-<script type="text/javascript">
-//开始全局变量
-<script type="text/javascript" src="../../includes/lib/jquery-1.7.js"></script>
-<script type="text/javascript" src="../../includes/lib/jsoapclient.js"></script>
-<script type="text/javascript" src="../../includes/lib/jsoapclientparse.js"></script>
+
+
 <script type="text/javascript">
  var disqus_shortname = 'zxlzr'; // required: replace example with your forum shortname
 var disqus_developer = 1;
 disqus_url_tmp="http://";
 disqus_url="http://www.qq.com";
-function getgb(value,servicename)
-{
-	var result;
-        mydata = '{"data":[{"type":"xsd:string","value":"' + value + '"}]}'; 
-        jQuery.jSOAPClient.setLocation('../../includes/service.php');
-	jQuery.jSOAPClient.setUrn('http://localhost');
-	jQuery.jSOAPClient.setSuccess(function(data){
-		show(data);
-	});
-	jQuery.jSOAPClient.setError(function(data){
-		document.write("Error: to call soap web service!");
-	});
-	jQuery.jSOAPClient.call(servicename,mydata);
 
-}
-function showgb(result)
-{
-	document.write(result);
-}
+　function createXml(str){ 
+
+　　if(document.all){ 
+
+　　var xmlDom=new ActiveXObject("Microsoft.XMLDOM") 
+
+　　xmlDom.loadXML(str) 
+
+　　return xmlDom 
+
+　　} 
+
+　　else 
+
+　　return new DOMParser().parseFromString(str, "text/xml") 
+
+　　} 
+
+
+
+function HtmlDecode(str) { 
+var t = document.createElement("div"); 
+t.innerHTML = str; 
+return t.innerText || t.textContent 
+} 
 
 
  //disqus_identifier='';//全局变
@@ -60,22 +99,47 @@ $(document).ready(function() {
 //团购数据生成代码 
 
  sum=0;
-   	$.ajax({
-					type:'GET',
-					url:'meituan.xml',
-					async:false,
-					dataType:'xml',//注意处理信息的类型为xml,默认为html
-					success:function(docxml){
-					   
-						//查找并迭代<book>节点
-						$(docxml).find('deal').each(function(){
+ 
+ 
+ 
+ sum=0;
+	 result="";
+
+        mydata = '{"data":[{"type":"xsd:string","value":"' + "Test" + '"}]}'; 
+        // mydata2 = '{"data":[{"type":"xsd:string","value":"' + "JY" + '"}]}';
+        jQuery.jSOAPClient_gb.setLocation('http://localhost/mediawiki-1.16.5/extensions/ccgroup/includes/service.php');
+	jQuery.jSOAPClient_gb.setUrn('http://localhost');
+	jQuery.jSOAPClient_gb.setSuccess(function(data){
+		result=HtmlDecode(data);
+		//alert(result);
+			$(createXml(result)).find('data').each(function(){
 						     sum=sum+1;
+							
+						
+							
+							
+							//alert(info);
 						})
-					}
-				});
+				navegate_gb();
+		 
+		 
+		 
+		 
+	});
+	jQuery.jSOAPClient_gb.setError(function(data){
+		document.write("Error: to call soap web service!");
+	});
+	jQuery.jSOAPClient_gb.call('getGroupBuy',mydata);
+
+
+ 
+ 
+ 
+
+
 
 				
-				$(function(){
+				function navegate_gb(){
 	//optional set
 	pageNav.pre="PRE";
 	pageNav.next="NEXT";
@@ -84,55 +148,69 @@ $(document).ready(function() {
 	 //  pn: page sum.
 	pageNav.fn = function(p,pn){
 	  
-	    	$.ajax({
-					type:'GET',
-					url:'meituan.xml',
-					async:false,
-					dataType:'xml',//注意处理信息的类型为xml,默认为html
-					success:function(docxml){
-					     
+					     	
 						//查找并迭代<book>节点
-						$(docxml).find('deal').each(function(){
-							if($(this).attr("id")==p){
-							var deal_title = $(this).children('deal_title').text();
-							var deal_url = $(this).children('deal_url').text();
-							var deal_img = $(this).children('deal_img').text();
-							var deal_desc = $(this).children('deal_desc').text();
-							globalpicid=$(this).children('globalid').text();
+						$(createXml(result)).find('data').each(function(){
+							if($(this).children('page').text()==p){
+							var deal_title = $(this).children('title').text();
+							var deal_url = $(this).children('url').text();
+							var deal_img = $(this).children('image').text();
+							var deal_desc = $(this).children('detail').text();
+							var deal_price = $(this).children('price').text();
+							var deal_value = $(this).children('value').text();
+
+							globalpicid=$(this).children('id').text();
 							 disqus_url_tmp='http://'+globalpicid;
+
+							
+							var gb_dest = "";
+							$(this).children('shops').find('shop').each(function(){
+								var gb_add = $(this).children('address').text();
+							        var gb_latitude = $(this).children('latitude').text();	
+							        var gb_longitude = $(this).children('longitude').text();	
+								var gb_tmp = gb_add + ";" + gb_latitude + ";" + gb_longitude;
+								gb_dest = gb_dest + gb_tmp + " ";
+							})
+						
+							var gb_url = location.href;
+							var gb_tmp = gb_url.split("/");	
+							var gb_page_name = gb_tmp[gb_tmp.length-1];
+							
+							saveSession(gb_page_name, deal_title, deal_img, deal_url, gb_dest);
+
 							//alert(disqus_url_tmp);
 							//dogetpiclist();
 							//alert(globalpicid);
 							//构造节点
 							
-							var  info = '<li>'+deal_title+'</li><li><img src="'+deal_img+'" /></li><li>  
-<a href="'+deal_url+'"> interest</a> 
-<a href="'+deal_url+'"> join</a>
-</li>';
+var  info = '<div class=tgname>当日精选：'+deal_title+'</div><div class=tgpic><img src="'+deal_img+'" width="427" height="260" /></div><div class=tgdesc>'+deal_desc+'</div><div class=tgbtn><span class=delx>原价：'+deal_value+'元</span>&nbsp;&nbsp;<span class=org>>现价：'+deal_price+'元</span>&nbsp;&nbsp;<a href="'+deal_url+'" class=tg_btn>我>感兴趣</a>&nbsp;&nbsp;<a href="'+deal_url+'" class=tg_btn>我要购买</a></div>';
+
+
+
 							$('#groupbuyinfo').html(info);
-						  //disqus_identifier=globalpicid;
-						  //douploadpic='./uploadify/uploadify.php?pic='+globalpicid;
-						  //alert(douploadpic);
-						//  alert(disqus_identifier);
 							//$('#disqus_thread').html('<div id="disqus_thread"></div>');
-							$("#file_upload").uploadifySettings('scriptData',{'pic':globalpicid});动态更新配置参数 
+							$("#file_upload").uploadifySettings('scriptData',{'pic':globalpicid});
 							
 							}
 							//alert(info);
 						})
-					}
 				
 				
 				
-				});
 				//图片的 第二模块
 				
 	$.get("getpiclist.php", { id: globalpicid},
   function(data){
                         var  info="";
+  
 						$(data).find('pic').each(function(){
+						
 							var pic = $(this).text();
+							alert("pic:"  + pic);	
 							 info = info+'<img src="uploads/'+globalpicid+'/'+pic+'" alt="" width="100" height="100" />';
+							
+							
+							
 						
 						})
 						
@@ -155,19 +233,23 @@ $(document).ready(function() {
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 	
+		
+		
 	
 	};
 	
 	//goto the page 3 of 33.
 	pageNav.go(1,sum);
 	
-});
+}
+						
 				
 				
 				function getglobalpicid(){
 				return globalpicid;
 				
 				}
+				
 
 
   $('#file_upload').uploadify({
@@ -187,11 +269,14 @@ $(document).ready(function() {
 							
 						
 							 info = info+'<img src="uploads/'+globalpicid+'/'+pic+'" alt="" width="100" height="100" />';
-							
+						
 							
 						
 						})
+						//alert(info);
 							$('#facesPhotoWrapper').html(info);
+				
+				 
 				
                }
   });
@@ -201,10 +286,26 @@ $(document).ready(function() {
 
 
 
-
-
-
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -215,13 +316,16 @@ $(document).ready(function() {
 		
 	</head>
 	<body>
+    <div id="btn"><input name="" type="button" value="configure" class="btn_01" />&nbsp;&nbsp;<input name="" type="button" value="source" class="btn_01" /></div>
 	<div id="pageNav" style="width:435px;"></div>
-	<div id="groupbuyinfo" style="width:435px;"></div>
-		<input id="file_upload" name="file_upload" type="file" />
-	<div id="facesPhotoWrapper" style="width:435px;"></div>
-	<div id="disqus_thread" style="width:435px;"</div>
+    
+	<div id="groupbuyinfo"></div>
+    
+	<div class="photoup"><input name="file_upload" type="file" id="file_upload" size="50" maxlength="100" /></div>
+	<div id="facesPhotoWrapper"></div>
+	<div id="disqus_thread"style="width:435px;"></div>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></body><script type="text/javascript">//第三板块
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></body>
 	</body>
 </html>
 

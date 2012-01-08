@@ -1,0 +1,104 @@
+<noinclude>
+This widget allows you to add a baidu map and businfo function to your wiki page.
+
+It was originally created by [http://ccnt.zju.edu.cn/ CCNT LAB].
+== Using this widget ==
+For information on how to use this widget, see [http://www.mediawikiwidgets.org/Flickr widget description page on MediaWikiWidgets.org].
+
+== Copy to your site ==
+To use this widget on your site, just install [http://www.mediawiki.org/wiki/Extension:Widgets MediaWiki Widgets extension] and copy [{{fullurl:{{FULLPAGENAME}}|action=edit}} full source code] of this page to your wiki as '''{{FULLPAGENAME}}''' article.
+</noinclude>
+
+<includeonly>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.2/src/CityList_min.js"></script>
+<script type="text/javascript" src="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/js/jquery-1.7.min.js"></script>
+
+<link rel="stylesheet" href="http://localhost/mediawiki-1.16.5/extensions/ccgroup/widgets/css/businfo.css" />
+<style>
+    .cityList{height: 320px;width:372px;overflow-y:auto;}
+    .sel_container{position:absolute;top:0;font-size:12px;}
+    .map_popup {position: absolute;z-index: 200000;width: 382px;height: 344px;top:20px;}
+    .map_popup .popup_main { background:#fff;border: 1px solid #8BA4D8;height: 100%;overflow: hidden;position: absolute;width: 100%;z-index: 2;}
+    .map_popup .title {background: url("http://map.baidu.com/img/popup_title.gif") repeat scroll 0 0 transparent;
+    color: #6688CC;font-size: 12px;font-weight: bold;height: 24px;line-height: 25px;padding-left: 7px;}
+    .map_popup button {background: url("http://map.baidu.com/img/popup_close.gif") no-repeat scroll 0 0 transparent;
+    border: 0 none;cursor: pointer;height: 12px;position: absolute;right: 4px;top: 6px;width: 12px;}	
+</style>
+
+<body>
+<div class=" m_t5 m_b5" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"><input name="" type="button" value="show on map"  class="mapbtn"/></div>
+
+<div style="width:<!--{$width|escape:'html'|default:'420'}-->px;height:300px;border:1px solid #000;margin-top:10px;margin-bottom:10px;" id="container"></div>
+
+<div class="sel_container" style="display:none;"></div>
+
+
+
+<div class="busfrom" style="width:<!--{$width|escape:'html'|default:'420'}-->px;">起点：<input type="text" id="from" class="input100" style="width:135px;"/>&nbsp;&nbsp;终点：<input type="text" id="to" class="input100" style="width:135px;"/>&nbsp;<input name="" type="button" value="搜索" class="btn_search" id="check_route"/></div>
+
+<div id="panel"> </div>
+
+<script type="text/javascript" >
+
+cityname="杭州";
+
+map = new BMap.Map("container");
+
+map.centerAndZoom(cityname, 12);
+
+
+ $("#check_route").click(function(){
+
+
+    var start = $("#from").val() ,end = $("#to").val() ,routePolicy = [BMAP_TRANSIT_POLICY_LEAST_TIME,BMAP_TRANSIT_POLICY_LEAST_TRANSFER,BMAP_TRANSIT_POLICY_LEAST_WALKING];
+    var arrInput = document.getElementById("dvPolicy").getElementsByTagName("input");
+    search(start,end,routePolicy[0]);
+    document.getElementById("dvPolicy").onclick = function(e){   
+        e = e || window.event;
+        var elem = e.srcElement || e.target , policyIndex;       
+        if(elem.tagName.toLowerCase() == "input"){
+            policyIndex = elem.getAttribute("id").replace("policy","");             
+            map.clearOverlays();
+            search(start,end,routePolicy[policyIndex]);             
+        }
+    }
+  
+});
+   
+    function search(start,end,route){ 
+        var transit = new BMap.TransitRoute(cityname,{
+            renderOptions: {map: map,panel:"results"}, 
+            policy: route,		
+			 
+    onSearchComplete: function(result) {
+        if (transit.getStatus()!=BMAP_STATUS_SUCCESS) {
+          $("#results").html("没有找到指定的公交导航路线");
+        }
+    }			
+			
+        });
+        transit.search(start,end);
+		var aa=transit.getResults();
+		
+		
+    }
+
+
+</script>
+
+
+<div id="dvPolicy" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"> <input id="policy0" checked="true" type="radio" name="pickPolicy"/>&nbsp;较便捷&nbsp;&nbsp;<input id="policy1" type="radio" name="pickPolicy"/>&nbsp;可换乘&nbsp;&nbsp;<input id="policy2" type="radio" name="pickPolicy"/>&nbsp;少步行</div> 
+<div id="results" style="width:<!--{$width|escape:'html'|default:'420'}-->px;"></div>
+
+
+</body>
+
+</includeonly>
+
+==Test==
+{{#widget:BusInfo
+|width:435
+}}
+

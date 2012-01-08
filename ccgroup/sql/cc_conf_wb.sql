@@ -36,7 +36,7 @@ CREATE TABLE `mw_cc_conf_wb` (
 
 LOCK TABLES `mw_cc_conf_wb` WRITE;
 /*!40000 ALTER TABLE `mw_cc_conf_wb` DISABLE KEYS */;
-INSERT INTO `mw_cc_conf_wb` VALUES ('iphone','sina,tencent','2011-12-28'),('keyword','sina,','2011-12-31'),('Test','sina,tencent','2011-12-28');
+INSERT INTO `mw_cc_conf_wb` VALUES ('iphone','sina,tencent','2011-12-28'),('keyword','sina,','2011-12-31');
 /*!40000 ALTER TABLE `mw_cc_conf_wb` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-01-05 13:37:08
+-- Dump completed on 2011-12-30 13:37:09

@@ -1,0 +1,73 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {margin:0; padding:0; font-family:Arial, Helvetica, sans-serif,宋体;  background:url(../images/back.png) top repeat-x #fff; font-size:14px;}
+
+
+#header { overflow:hidden; zoom:1;height:140px;}
+#header .fl { float:left; width:800px; background:url(../images/toplback.png) no-repeat; height:140px;}
+#header .fl h1 { width:190px; height:60px; margin:10px 0 0 10px; background:url(../images/logo.png) no-repeat; margin-bottom:44px;}
+#header .fl h1 a { text-indent:-999em; display:block;width:190px; height:60px;}
+
+.columntop { width:158px; height:25px; float:left; line-height:25px; border-top:1px #aaa solid; border-left:1px #aaa solid; border-right:1px #aaa solid; background:url(../images/btn_back_on.png) repeat-x;-moz-border-radius-topleft:5px;-khtml-border-top-left-radius:5px;-webkit-border-top-left-radius:5px;-moz-border-radius-topright:5px;-khtml-border-top-right-radius:5px;-webkit-border-top-right-radius:5px; text-indent:10px; font-size:16px; font-weight:bold;}
+
+.menu { margin-left:170px;height:26px; margin-right:10px;overflow:hidden; zoom:1;background:url(../images/btn_back_onn.png) repeat-x; padding-left:10px;}
+.menu li {  height:25px; padding:0 20px; margin-right:10px; line-height:25px;float:left;border-top:1px #aaa solid; border-left:1px #aaa solid; border-right:1px #aaa solid; background:url(../images/btn_back_off.png) repeat-x;-moz-border-radius-topleft:5px;-khtml-border-top-left-radius:5px;-webkit-border-top-left-radius:5px;-moz-border-radius-topright:5px;-khtml-border-top-right-radius:5px;-webkit-border-top-right-radius:5px; cursor:pointer}
+.menu li.curr {background:url(../images/btn_back_on.png) repeat-x; height:25px;}
+
+
+
+#header .fr { float:right;width:264px; background:url(../images/toprback.png) no-repeat; height:140px;}
+#header .fr .toptext{ margin:10px 10px 0 0; float:right; margin-bottom:86px;}
+
+.search {height:26px;padding-right:10px;background:url(../images/btn_back_onn.png) repeat-x; text-align:center;}
+
+.search li {height:22px;border-top:1px #aaa solid;border-left:1px #aaa solid; border-right:1px #aaa solid; background:url(../images/btn_back_search.png) repeat-x;-moz-border-radius-topleft:5px;-khtml-border-top-left-radius:5px;-webkit-border-top-left-radius:5px;-moz-border-radius-topright:5px;-khtml-border-top-right-radius:5px;-webkit-border-top-right-radius:5px; text-align:center; padding-top:3px;}
+
+
+
+#main { overflow:hidden; zoom:1;}
+#main .mainl { float:left; width:160px;}
+
+.userinfo {border-bottom:1px #aaa solid; border-left:1px #aaa solid; border-right:1px #aaa solid; background-color:#fff;-moz-border-radius-bottomleft:5px;-khtml-border-bottom-left-radius:5px;-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomright:5px;-khtml-border-bottom-right-radius:5px;-webkit-border-bottom-right-radius:5px;}
+
+.creatorinfo {border:1px #aaa solid;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px; margin-top:10px; background-color:#f6f6f6; padding:5px;}
+.creatorinfo h3 { line-height:25px; background:url(../images/lefth3back.png) right bottom no-repeat;  font-weight:bold;}
+.creatorp { padding-left:10px; line-height:25px;}
+
+.ad { text-align:center;}
+.ad img { margin-top:10px;}
+
+
+#main .mainr { margin-left:170px; border-left:1px #aaa solid; border-bottom:1px #aaa solid; padding:10px;}
+
+.aboutbox { border:1px #dceaf7 solid; padding:5px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.aboutbox .hd { line-height:25px; background:url(../images/title_bback.png) bottom repeat-x; border-bottom:1px #aaa solid; padding-left:10px; font-weight:bold;  }
+.aboutbox .bd { line-height:25px;}
+
+.wikitop10 { float:left; width:49%;border:1px #ffe0af solid; background-color:#fff5e4; margin-top:10px;padding:5px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.wikitop10 .hd { line-height:25px; background:url(../images/title_rback.png) bottom repeat-x; border-bottom:1px #aaa solid; padding-left:10px; font-weight:bold;  }
+.wikitop10 .bd { line-height:25px;}
+.wikitop10 .bd li,.rdian li { text-indent:20px; background:url(../images/rdian.png) no-repeat 8px 8px;}
+
+.temptop10 { margin-left:51%;border:1px #dceaf7 solid; background-color:#f1f7fc; margin-top:10px;padding:5px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.temptop10 .hd { line-height:25px; background:url(../images/title_bback2.png) bottom repeat-x; border-bottom:1px #aaa solid; padding-left:10px; font-weight:bold;  }
+.temptop10 .bd { line-height:25px;}
+.temptop10 .bd li,.bdian li { text-indent:20px; background:url(../images/bdian.png) no-repeat 8px 8px;}
+
+.otherbox { border:1px #c2e2bd solid; background-color:#f3faf2; margin-top:10px;padding:5px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.otherbox .hd { line-height:25px; background:url(../images/title_gback.png) bottom repeat-x; border-bottom:1px #aaa solid; padding-left:10px; font-weight:bold;  }
+.otherbox .bd { line-height:25px;}
+
+.localtion {line-height:25px; background:url(../images/title_bback.png) bottom repeat-x; border-bottom:1px #aaa solid; padding-left:10px; font-weight:bold;  }
+
+.title { background:url(../images/titleback.png) repeat-x; height:78px; border-bottom:1px #ccc solid; line-height:78px; padding-left:20px; font-size:28px; }
+
+.content { padding:10px; line-height:25px;}
+
+
+
+
+#footer { height:80px; display:block; border-top:1px #aaa solid; margin-top:10px; background-color:#e0e9f5; text-align:center;}
+#footer p { margin-top:10px; line-height:30px;}
+
